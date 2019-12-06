@@ -3,69 +3,20 @@
 
 import xbmcplugin
 import xbmcgui
-import xbmc
 import xbmcaddon
 import sys
 import urllib.request, urllib.parse, urllib.error
 import urllib.parse
 import requests
 import re
-import tvdbsimple as tvdb
+from . import tvdb
+from .utils import log
 
 ADDON = xbmcaddon.Addon()
 ID = ADDON.getAddonInfo('id')
 HANDLE = int(sys.argv[1])
-tvdb.KEYS.API_KEY = 'd60d3c015fdb148931e8254c0e96f072'
-tvdb.KEYS.API_TOKEN = ADDON.getSetting('token')
 images_url = 'http://thetvdb.com/banners/'
 
-# log function
-def log(msg):
-    xbmc.log(msg='{addon}: {msg}'.format(addon=ID, msg=msg), level=xbmc.LOGDEBUG)
-
-def search_series_api(title):
-    search= tvdb.Search()
-    ret = None 
-    try:
-        ret = search.series(title, language=ADDON.getSetting('language'))
-    except:
-        pass
-    ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)
-    return ret
-    
-def get_series_details_api(id, all=True):
-    show = tvdb.Series(id, language=ADDON.getSetting('language'))
-    if all:
-        try:
-            show.info()
-        except:
-            return None
-        try:
-            show.actors()
-        except:
-            show.actors = []
-    try:
-        show.Images.fanart()
-    except:
-        show.Images.fanart = []
-    try:
-        show.Images.poster()
-    except:
-        show.Images.poster = []
-    try:
-        show.Images.series()
-    except:
-        show.Images.series = []
-    try:
-        show.Images.season()
-    except:
-        show.Images.season = []
-    try:
-        show.Images.seasonwide()
-    except:
-        show.Images.seasonwide = []
-    ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)
-    return show
 
 def get_cast(show):
     actors = []
@@ -75,29 +26,6 @@ def get_cast(show):
         else:
             actors.append({'name': actor['name'], 'role': actor['role']})
     return actors
-
-def get_series_episodes_api(id, language=None):
-    ret = None
-    if not language:
-        language = ADDON.getSetting('language')
-    showeps = tvdb.Series_Episodes(id, language=language)
-    try:
-        ret = showeps.all()
-    except:
-        pass
-    ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)
-    return ret
-
-def get_episode_details_api(id, language=None):
-    if not language:
-        language = ADDON.getSetting('language')
-    ep = tvdb.Episode(id, language=language)
-    try:
-        ep.info()
-    except:
-        return None
-    ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)
-    return ep
 
 # get the movie info via imdb
 def get_imdb_info(id):
@@ -113,19 +41,18 @@ def get_imdb_info(id):
 
 # add the found shows to the list
 def search_series(title, year=None):
-    serach_term = title if year is None else '{} {}'.format(title, year)
-    log('Searching for TV show {}'.format(serach_term))
+    log('Searching for TV show {}'.format(title))
 
-    shows = search_series_api(serach_term)
-    if not shows:
-        xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem(offscreen=True))
-        return
-    for show in shows:
+    search_results = tvdb.search_series_api(title)
+    if year is not None:
+        search_result = tvdb.filter_by_year(search_results, year)
+        search_results = (search_result,) if search_result else ()
+    for show in search_results:
+        show_name = show['seriesName']
+        if show['firstAired']:
+            show_name += u' ({})'.format(show['firstAired'][:4])
         log('Show {}'.format(show))
-        if show['banner']:
-            liz=xbmcgui.ListItem(show['seriesName'], offscreen=True)
-        else:
-            liz=xbmcgui.ListItem(show['seriesName'], offscreen=True)
+        liz=xbmcgui.ListItem(show_name, offscreen=True)
         #liz.setProperty('relevance', '0.5')
         xbmcplugin.addDirectoryItem(
             handle=HANDLE, 
@@ -133,12 +60,11 @@ def search_series(title, year=None):
             listitem=liz, 
             isFolder=True
         )
-    xbmcplugin.setResolvedUrl(handle=HANDLE, succeeded=True, listitem=liz)
 
 # get the details of the found series
 def get_series_details(id):
     log('Find info of tvshow with id {id}'.format(id=id))
-    show = get_series_details_api(id)
+    show = tvdb.get_series_details_api(id)
     if not show:
         xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem(offscreen=True))
         return
@@ -184,7 +110,7 @@ def add_artworks(show, liz):
         liz.setAvailableFanart(fanarts)
 
 def get_artworks(id):
-    show = get_series_details_api(id, False)
+    show = tvdb.get_series_details_api(id, False)
     if not show:
         xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem(offscreen=True))
         return
@@ -195,7 +121,7 @@ def get_artworks(id):
 # add the episodes of a series to the list
 def get_series_episodes(id):
     log('Find episodes of tvshow with id {id}'.format(id=id))
-    episodes = get_series_episodes_api(id)
+    episodes = tvdb.get_series_episodes_api(id)
     if not episodes:
         xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem(offscreen=True))
         return
@@ -220,7 +146,7 @@ def get_series_episodes(id):
 # get the details of the found episode
 def get_episode_details(id):
     log('Find info of episode with id {id}'.format(id=id))
-    ep = get_episode_details_api(id)
+    ep = tvdb.get_episode_details_api(id)
     if not ep:
         xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem(offscreen=True))
         return
@@ -273,8 +199,8 @@ def run():
         action=urllib.parse.unquote_plus(params["action"])
         if action == 'find' and 'title' in params:
             search_series(urllib.parse.unquote_plus(params["title"]), params.get("year", None))
-        # elif action == 'nfourl':
-            #todo
+        # elif action.lower() == 'nfourl':
+            # get_show_from_nfo(params['nfo'])
         elif action == 'getdetails' and 'url' in params:
             get_series_details(urllib.parse.unquote_plus(params["url"]))
         elif action == 'getepisodelist' and 'url' in params:
