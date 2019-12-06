@@ -15,19 +15,13 @@ import tvdbsimple as tvdb
 ADDON = xbmcaddon.Addon()
 ID = ADDON.getAddonInfo('id')
 HANDLE = int(sys.argv[1])
-tvdb.KEYS.API_KEY = '439DFEBA9D3059C6'
+tvdb.KEYS.API_KEY = 'd60d3c015fdb148931e8254c0e96f072'
 tvdb.KEYS.API_TOKEN = ADDON.getSetting('token')
 images_url = 'http://thetvdb.com/banners/'
 
 # log function
 def log(msg):
     xbmc.log(msg='{addon}: {msg}'.format(addon=ID, msg=msg), level=xbmc.LOGDEBUG)
-
-# get addon url params
-def get_params():
-    if not sys.argv[2]:
-        return {}
-    return dict(urllib.parse.parse_qsl(sys.argv[2].lstrip('?')))
 
 def search_series_api(title):
     search= tvdb.Search()
@@ -119,17 +113,26 @@ def get_imdb_info(id):
 
 # add the found shows to the list
 def search_series(title, year=None):
-    log('Find tvshow with title {title}'.format(title=title))
-    shows = search_series_api(title)
+    serach_term = title if year is None else '{} {}'.format(title, year)
+    log('Searching for TV show {}'.format(serach_term))
+
+    shows = search_series_api(serach_term)
     if not shows:
+        xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem(offscreen=True))
         return
     for show in shows:
+        log('Show {}'.format(show))
         if show['banner']:
-            liz=xbmcgui.ListItem(show['seriesName'], thumbnailImage=images_url+show['banner'], offscreen=True)
+            liz=xbmcgui.ListItem(show['seriesName'], offscreen=True)
         else:
             liz=xbmcgui.ListItem(show['seriesName'], offscreen=True)
         #liz.setProperty('relevance', '0.5')
-        xbmcplugin.addDirectoryItem(handle=HANDLE, url=str(show['id']), listitem=liz, isFolder=True)
+        xbmcplugin.addDirectoryItem(
+            handle=HANDLE, 
+            url=str(show['id']), 
+            listitem=liz, 
+            isFolder=True
+        )
     xbmcplugin.setResolvedUrl(handle=HANDLE, succeeded=True, listitem=liz)
 
 # get the details of the found series
@@ -137,6 +140,7 @@ def get_series_details(id):
     log('Find info of tvshow with id {id}'.format(id=id))
     show = get_series_details_api(id)
     if not show:
+        xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem(offscreen=True))
         return
     liz=xbmcgui.ListItem(show.seriesName, offscreen=True)
     liz.setInfo('video',
@@ -182,6 +186,7 @@ def add_artworks(show, liz):
 def get_artworks(id):
     show = get_series_details_api(id, False)
     if not show:
+        xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem(offscreen=True))
         return
     liz=xbmcgui.ListItem(id, offscreen=True)
     add_artworks(show, liz)
@@ -192,6 +197,7 @@ def get_series_episodes(id):
     log('Find episodes of tvshow with id {id}'.format(id=id))
     episodes = get_series_episodes_api(id)
     if not episodes:
+        xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem(offscreen=True))
         return
     for ep in episodes:
         liz=xbmcgui.ListItem(ep['episodeName'], offscreen=True)
@@ -216,6 +222,7 @@ def get_episode_details(id):
     log('Find info of episode with id {id}'.format(id=id))
     ep = get_episode_details_api(id)
     if not ep:
+        xbmcplugin.setResolvedUrl(HANDLE, False, xbmcgui.ListItem(offscreen=True))
         return
     liz=xbmcgui.ListItem(ep.episodeName, offscreen=True)
     details = {'title': ep.episodeName,
@@ -227,10 +234,10 @@ def get_episode_details(id):
                'aired': ep.firstAired
               }
               
-    if ep.airsAfterSeason >= 0:
+    if ep.airsAfterSeason and ep.airsAfterSeason >= 0:
         details['sortseason'] = 10000
         details['sortepisode'] = ep.airsAfterSeason
-    elif ep.airsBeforeSeason >= 0:
+    elif ep.airsBeforeSeason and ep.airsBeforeSeason >= 0:
         details['sortepisode'] = ep.airsBeforeSeason
         details['sortseason'] = ep.airsBeforeEpisode
 
@@ -260,11 +267,14 @@ def get_episode_details(id):
     xbmcplugin.setResolvedUrl(handle=HANDLE, succeeded=True, listitem=liz)
 
 def run():
-    params=get_params()
+    params = dict(urllib.parse.parse_qsl(sys.argv[2][1:]))
+    log('Called addon with params: {}'.format(sys.argv))
     if 'action' in params:
         action=urllib.parse.unquote_plus(params["action"])
         if action == 'find' and 'title' in params:
             search_series(urllib.parse.unquote_plus(params["title"]), params.get("year", None))
+        # elif action == 'nfourl':
+            #todo
         elif action == 'getdetails' and 'url' in params:
             get_series_details(urllib.parse.unquote_plus(params["url"]))
         elif action == 'getepisodelist' and 'url' in params:
