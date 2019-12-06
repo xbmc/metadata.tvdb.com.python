@@ -1,5 +1,5 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
-from resources.lib import main
+from resources.lib import actions
 
-main.run()
+actions.run()

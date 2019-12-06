@@ -10,6 +10,7 @@ ADDON = xbmcaddon.Addon()
 tvdb.KEYS.API_KEY = 'd60d3c015fdb148931e8254c0e96f072'
 tvdb.KEYS.API_TOKEN = ADDON.getSetting('token')
 
+
 def filter_by_year(shows, year):
     """
     Filter a show by year
@@ -24,17 +25,18 @@ def filter_by_year(shows, year):
             return show
     return None
 
+
 def search_series_api(title):
-    search= tvdb.Search()
-    ret = None 
+    search = tvdb.Search()
+    ret = None
     try:
         ret = search.series(title, language=ADDON.getSetting('language'))
     except:
         pass
     ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)
     return ret
-    
-    
+
+
 def get_series_details_api(id, all=True):
     show = tvdb.Series(id, language=ADDON.getSetting('language'))
     if all:
@@ -69,7 +71,7 @@ def get_series_details_api(id, all=True):
     ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)
     return show
 
-    
+
 def get_series_episodes_api(id, language=None):
     ret = None
     if not language:
@@ -81,6 +83,7 @@ def get_series_episodes_api(id, language=None):
         pass
     ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)
     return ret
+
 
 def get_episode_details_api(id, language=None):
     if not language:

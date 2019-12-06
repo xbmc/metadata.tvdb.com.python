@@ -7,6 +7,7 @@ import xbmcaddon
 ADDON = xbmcaddon.Addon()
 ID = ADDON.getAddonInfo('id')
 
+
 def safe_get(dct, key, default=None):
     """
     Get a key from dict
@@ -18,5 +19,8 @@ def safe_get(dct, key, default=None):
     return default
 
 # log function
+
+
 def log(msg):
-    xbmc.log(msg='{addon}: {msg}'.format(addon=ID, msg=msg), level=xbmc.LOGDEBUG)
+    xbmc.log(msg='{addon}: {msg}'.format(
+        addon=ID, msg=msg), level=xbmc.LOGDEBUG)
