@@ -166,13 +166,13 @@ def get_series_details(id):
 
 def add_artworks(show, liz):
     for poster in show.Images.poster:
-        liz.addAvailableThumb(images_url+poster['fileName'], 'poster')
+        liz.addAvailableArtwork(images_url+poster['fileName'], 'poster')
     for banner in show.Images.series:
-        liz.addAvailableThumb(images_url+banner['fileName'], 'banner')
+        liz.addAvailableArtwork(images_url+banner['fileName'], 'banner')
     for season in show.Images.season:
-        liz.addAvailableThumb(images_url+season['fileName'], 'poster', season=int(season['subKey']))
+        liz.addAvailableArtwork(images_url+season['fileName'], 'poster', season=int(season['subKey']))
     for seasonwide in show.Images.seasonwide:
-        liz.addAvailableThumb(images_url+seasonwide['fileName'], 'banner', season=int(seasonwide['subKey']))
+        liz.addAvailableArtwork(images_url+seasonwide['fileName'], 'banner', season=int(seasonwide['subKey']))
     fanarts = []
     for fanart in show.Images.fanart:
         fanarts.append({'image': images_url+fanart['fileName'], 'preview': images_url+fanart['thumbnail']})
@@ -256,7 +256,7 @@ def get_episode_details(id):
     else:
         liz.setUniqueIDs({ 'tvdb': ep.id }, 'tvdb')
     if ep.filename:
-        liz.addAvailableThumb(images_url+ep.filename)
+        liz.addAvailableArtwork(images_url+ep.filename)
     xbmcplugin.setResolvedUrl(handle=HANDLE, succeeded=True, listitem=liz)
 
 def run():
