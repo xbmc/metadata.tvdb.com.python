@@ -19,11 +19,12 @@ def filter_by_year(shows, year):
     :param year: premiere year
     :return: a found show or None
     """
+    ret = []
     for show in shows:
         firstAired = safe_get(show, 'firstAired', '')
         if firstAired and firstAired.startswith(str(year)):
-            return show
-    return None
+            ret.append(show)
+    return ret
 
 
 def search_series_api(title):

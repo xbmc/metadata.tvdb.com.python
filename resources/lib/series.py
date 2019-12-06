@@ -17,21 +17,22 @@ HANDLE = int(sys.argv[1])
 
 # add the found shows to the list
 def search_series(title, year=None):
-    log('Searching for TV show {}'.format(title))
+    log('Searching for TV show "{}"'.format(title))
 
     search_results = tvdb.search_series_api(title)
     if year is not None:
-        search_result = tvdb.filter_by_year(search_results, year)
-        search_results = (search_result,) if search_result else ()
+        filtered_search_result = tvdb.filter_by_year(search_results, year)
+        if len(filtered_search_result) > 0:
+            search_results = _find_exact_series_match(
+                filtered_search_result, title)
+        else:
+            search_results = _find_exact_series_match(search_results, title)
+
     if search_results is None:
         return
     for show in search_results:
-        show_name = show['seriesName']
-        if show['firstAired']:
-            show_name += u' ({})'.format(show['firstAired'][:4])
-        log('Show {}'.format(show))
-        liz = xbmcgui.ListItem(show_name, offscreen=True)
-        #liz.setProperty('relevance', '0.5')
+        liz = xbmcgui.ListItem(show['seriesName'], offscreen=True)
+        # liz.setProperty('relevance', '0.5')
         xbmcplugin.addDirectoryItem(
             handle=HANDLE,
             url=str(show['id']),
@@ -39,7 +40,18 @@ def search_series(title, year=None):
             isFolder=True
         )
 
-# get the details of the found series
+
+def _find_exact_series_match(series_list, title: str):
+    log(series_list)
+    first_or_default = next(
+        (x for x in series_list if x['seriesName'] == title), None)
+
+    if first_or_default is None:
+        return series_list
+    else:
+        return [first_or_default]
+
+    # get the details of the found series
 
 
 def get_series_details(id, images_url: str):
@@ -53,7 +65,7 @@ def get_series_details(id, images_url: str):
     liz.setInfo('video',
                 {'title': show.seriesName,
                  'plot': show.overview,
-                 'duration': int(show.runtime) * 60,
+                 'duration': int(show.runtime) * 60 if show.runtime else 0,
                  'mpaa': show.rating,
                  'genre': show.genre,
                  'studio': show.network,
