@@ -64,14 +64,17 @@ def get_series_details(id, images_url: str):
     liz = xbmcgui.ListItem(show.seriesName, offscreen=True)
     liz.setInfo('video',
                 {'title': show.seriesName,
+                 'tvshowtitle': show.seriesName,
                  'plot': show.overview,
+                 'plotoutline': show.overview,
                  'duration': int(show.runtime) * 60 if show.runtime else 0,
                  'mpaa': show.rating,
                  'genre': show.genre,
                  'studio': show.network,
                  'premiered': show.firstAired,
                  'status': show.status,
-                 'episodeguide': show.id
+                 'episodeguide': show.id,
+                 'mediatype': 'tvshow'
                  })
     isimdbdef = (show.imdbId and ADDON.getSetting('RatingS') == 'IMDb')
     liz.setRating("tvdb", show.siteRating, show.siteRatingCount, not isimdbdef)

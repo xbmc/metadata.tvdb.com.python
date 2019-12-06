@@ -53,11 +53,13 @@ def get_episode_details(id, images_url: str):
     liz = xbmcgui.ListItem(ep.episodeName, offscreen=True)
     details = {'title': ep.episodeName,
                'plot': ep.overview,
+               'plotoutline': ep.overview,
                'credits': ep.writers,
                'cast': ep.guestStars,
                'director': ep.directors,
                'premiered': ep.firstAired,
-               'aired': ep.firstAired
+               'aired': ep.firstAired,
+               'mediatype': 'episode'
                }
 
     if ep.airsAfterSeason and ep.airsAfterSeason >= 0:
