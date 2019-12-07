@@ -9,18 +9,18 @@ HANDLE = int(sys.argv[1])
 
 
 def add_artworks(show, liz, images_url: str):
-    for poster in show.Images.poster:
+    for poster in sorted(show.Images.poster, key=lambda image: image['ratingsInfo']['average'], reverse=True):
         liz.addAvailableArtwork(images_url+poster['fileName'], 'poster')
-    for banner in show.Images.series:
+    for banner in sorted(show.Images.series, key=lambda image: image['ratingsInfo']['average'], reverse=True):
         liz.addAvailableArtwork(images_url+banner['fileName'], 'banner')
-    for season in show.Images.season:
+    for season in sorted(show.Images.season, key=lambda image: image['ratingsInfo']['average'], reverse=True):
         liz.addAvailableArtwork(
             images_url+season['fileName'], 'poster', season=int(season['subKey']))
-    for seasonwide in show.Images.seasonwide:
+    for seasonwide in sorted(show.Images.seasonwide, key=lambda image: image['ratingsInfo']['average'], reverse=True):
         liz.addAvailableArtwork(
             images_url+seasonwide['fileName'], 'banner', season=int(seasonwide['subKey']))
     fanarts = []
-    for fanart in show.Images.fanart:
+    for fanart in sorted(show.Images.fanart, key=lambda image: image['ratingsInfo']['average'], reverse=True):
         fanarts.append(
             {'image': images_url+fanart['fileName'], 'preview': images_url+fanart['thumbnail']})
     if fanarts:
