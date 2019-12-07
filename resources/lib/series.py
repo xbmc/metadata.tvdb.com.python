@@ -94,7 +94,7 @@ def get_series_details(id, images_url: str):
 
 def _get_cast(show, images_url: str):
     actors = []
-    for actor in show.actors:
+    for actor in sorted(show.actors, key=lambda actor: actor['sortOrder']):
         if actor['image']:
             actors.append(
                 {'name': actor['name'], 'role': actor['role'], 'thumbnail': images_url+actor['image']})
