@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr ""
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr ""
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr ""
@@ -38,10 +34,6 @@ msgstr ""
 
 msgctxt "#30005"
 msgid "Get Rating from"
-msgstr ""
-
-msgctxt "#30006"
-msgid "Use TheTVDB Ratings in case IMDb is missing"
 msgstr ""
 
 msgctxt "#30007"

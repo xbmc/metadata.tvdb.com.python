@@ -19,11 +19,6 @@
                   <dependency type="enable" setting="dvdorder">false</dependency>
                </dependencies>
             </setting>
-            <setting id="fanart" type="boolean" label="30002">
-               <level>0</level>
-               <default>true</default>
-               <control type="toggle" />
-            </setting>
             <setting id="language" type="string" label="30004">
                <level>0</level>
                <default>en</default>
@@ -66,14 +61,6 @@
                   </options>
                </constraints>
                <control type="spinner" format="integer" />
-            </setting>
-            <setting id="fallback" type="boolean" label="30006">
-               <level>0</level>
-               <default>true</default>
-               <control type="toggle" />
-               <dependencies>
-                  <dependency type="visible" setting="RatingS" operator="is">1</dependency>
-               </dependencies>
             </setting>
          </group>
       </category>

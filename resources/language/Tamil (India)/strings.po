@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "தனி வரிசை (தனி சீசன்) பயன்படுத்து"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "விசிறிபடத்தை காண்பி"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "சுவரொட்டிகள் விருப்பு"

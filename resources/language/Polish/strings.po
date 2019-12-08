@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "Używaj absolutnego porządku (jeden sezon)"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "Używaj tapet"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "Preferuj plakaty"

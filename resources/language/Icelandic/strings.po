@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "Nota ’Absolute Ordering' (Ein þáttaröð)"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "Virkja Fanart"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "Nota Heldur Veggspjöld"

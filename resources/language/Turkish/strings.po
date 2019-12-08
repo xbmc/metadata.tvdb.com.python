@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "Mutlak Sıralama Kullan (Tek Sezon)"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "Fanart Etkinleştir"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "Posterleri Tercih Et"

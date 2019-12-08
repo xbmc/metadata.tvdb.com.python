@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "Ползвай последователно номериране (един сезон)"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "Ползвай фанарт"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "Предпочитай постерите"

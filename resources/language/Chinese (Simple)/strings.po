@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "使用绝对顺序（单季）"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "启用同人画"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "使用封面海报"

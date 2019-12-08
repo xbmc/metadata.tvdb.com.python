@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "ใช้การเรียงลำดับโดยสมบูรณ์ (ฤดูเดียว)"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "เปิดใช้ แฟนอาร์ต"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "เลือกใช้ โปสเตอร์"

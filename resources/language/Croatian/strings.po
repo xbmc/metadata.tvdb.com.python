@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "Koristi potpuni poredak (Jedna sezona)"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "Omogući omote emisija"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "Preferiraj plakate"

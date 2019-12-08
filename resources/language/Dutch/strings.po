@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "Absolute volgorde gebruiken (Eén seizoen)"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "Fanart inschakelen"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "Posters inschakelen"

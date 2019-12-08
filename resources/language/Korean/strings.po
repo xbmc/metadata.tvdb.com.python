@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "절대 순서 사용 (하나의 시즌)"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "팬아트 사용"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "포스터 우선"

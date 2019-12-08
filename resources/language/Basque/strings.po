@@ -16,10 +16,6 @@ msgstr ""
 "Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "Gaitu Fanarta"
-
 msgctxt "#30004"
 msgid "Language"
 msgstr "Hizkuntza"

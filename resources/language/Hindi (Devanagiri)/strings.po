@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "आब्सोल्यूट ऑर्डरिंग का प्रयोग करे (सिंगल सीज़न)"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "फ़ानर्ट को एनेबल करे"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "पोस्टर्स को प्रिफर करे"

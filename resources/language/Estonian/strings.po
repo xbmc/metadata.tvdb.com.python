@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "Kasuta absoluutset järjestust (Üks hooaeg)"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "Võimalda fännikunst"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "Eelista postreid"

@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "Použít absolutní řazení (pro jednu sérii)"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "Povolit Fanart"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "Upřednostňovat plagáty"

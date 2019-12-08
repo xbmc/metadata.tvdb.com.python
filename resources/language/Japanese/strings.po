@@ -24,10 +24,6 @@ msgctxt "#30001"
 msgid "Use Absolute Ordering (Single Season)"
 msgstr "完全オーダーを使用 (単一シーズン)"
 
-msgctxt "#30002"
-msgid "Enable Fanart"
-msgstr "ファンアートを有効に"
-
 msgctxt "#30003"
 msgid "Prefer Posters"
 msgstr "ポスターを使用"
