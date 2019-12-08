@@ -81,7 +81,7 @@ def get_episode_details(id, images_url: str):
 
     liz.setInfo('video', details)
 
-    isimdbdef = (ep.imdbId and ADDON.getSetting('RatingS') == 'IMDb')
+    isimdbdef = (ep.imdbId and ADDON.getSetting('RatingS') == 1) # IMDb
     liz.setRating("tvdb", ep.siteRating, ep.siteRatingCount, not isimdbdef)
     if ep.imdbId:
         liz.setUniqueIDs({'tvdb': ep.id, 'imdb': ep.imdbId}, 'tvdb')

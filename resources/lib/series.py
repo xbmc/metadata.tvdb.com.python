@@ -76,16 +76,20 @@ def get_series_details(id, images_url: str):
                  'episodeguide': show.id,
                  'mediatype': 'tvshow'
                  })
-    isimdbdef = (show.imdbId and ADDON.getSetting('RatingS') == 'IMDb')
-    liz.setRating("tvdb", show.siteRating, show.siteRatingCount, not isimdbdef)
+
+    isimdbdef = (show.imdbId and ADDON.getSetting('RatingS') == 1)  # IMDb
     if show.imdbId:
         liz.setUniqueIDs({'tvdb': show.id, 'imdb': show.imdbId}, 'tvdb')
         imdb_info = get_imdb_rating_and_votes(show.imdbId)
         if imdb_info['votes'] > 0:
             liz.setRating(
                 "imdb", imdb_info['rating'], imdb_info['votes'], isimdbdef)
+            liz.setRating("tvdb", show.siteRating,
+                          show.siteRatingCount, not isimdbdef)
     else:
         liz.setUniqueIDs({'tvdb': show.id}, 'tvdb')
+        liz.setRating("tvdb", show.siteRating,
+                      show.siteRatingCount, True)
 
     liz.setCast(_get_cast(show, images_url))
     add_artworks(show, liz, images_url)

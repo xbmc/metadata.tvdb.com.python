@@ -43,3 +43,15 @@ msgstr ""
 msgctxt "#30006"
 msgid "Use TheTVDB Ratings in case IMDb is missing"
 msgstr ""
+
+msgctxt "#30007"
+msgid "General"
+msgstr ""
+
+msgctxt "#30008"
+msgid "TheTVDB"
+msgstr ""
+
+msgctxt "#30009"
+msgid "IMDb"
+msgstr ""
