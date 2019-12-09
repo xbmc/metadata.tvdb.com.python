@@ -10,6 +10,14 @@ HANDLE = int(sys.argv[1])
 
 
 def add_artworks(show, liz, images_url: str):
+    # Set primary images
+    if show.poster:
+        liz.addAvailableArtwork(images_url+show.poster, 'poster')
+    if show.poster:
+        liz.addAvailableArtwork(images_url+show.banner, 'banner')
+    if show.poster:
+        liz.addAvailableArtwork(images_url+show.fanart, 'fanart')
+
     for poster in sorted(show.Images.poster, key=lambda image: image['ratingsInfo']['average'], reverse=True):
         liz.addAvailableArtwork(images_url+poster['fileName'], 'poster')
     for banner in sorted(show.Images.series, key=lambda image: image['ratingsInfo']['average'], reverse=True):
