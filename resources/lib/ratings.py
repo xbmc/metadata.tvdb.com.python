@@ -16,7 +16,7 @@ def ratings_episode(liz, ep):
         if imdb_rating['votes'] > 0:
             got_imdb_rating = True
             is_imdb_def = (ep.imdbId and ADDON.getSetting(
-                'RatingS') == 1)  # IMDb
+                'RatingS') == "1")  # IMDb
             log("is_imdb_def: {} {} {}".format(
                 is_imdb_def, ep.imdbId, ADDON.getSetting('RatingS')))
             liz.setRating(
@@ -34,7 +34,7 @@ def ratings_series(liz, show):
         if imdb_rating['votes'] > 0:
             got_imdb_rating = True
             is_imdb_def = (show.imdbId and ADDON.getSetting(
-                'RatingS') == 1)  # IMDb
+                'RatingS') == "1")  # IMDb
             log("is_imdb_def: {} {} {}".format(is_imdb_def,
                                                show.imdbId, ADDON.getSetting('RatingS')))
             liz.setRating(
