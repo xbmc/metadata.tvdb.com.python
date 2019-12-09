@@ -5,7 +5,7 @@ import xbmcaddon
 import sys
 from . import tvdb
 from .utils import log
-from .imdb_rating import get_imdb_rating_and_votes
+from .ratings import ratings_episode
 
 
 ADDON = xbmcaddon.Addon()
@@ -81,16 +81,13 @@ def get_episode_details(id, images_url: str):
 
     liz.setInfo('video', details)
 
-    isimdbdef = (ep.imdbId and ADDON.getSetting('RatingS') == 1) # IMDb
-    liz.setRating("tvdb", ep.siteRating, ep.siteRatingCount, not isimdbdef)
+    ratings_episode(liz, ep)
+
     if ep.imdbId:
         liz.setUniqueIDs({'tvdb': ep.id, 'imdb': ep.imdbId}, 'tvdb')
-        imdb_info = get_imdb_rating_and_votes(ep.imdbId)
-        if imdb_info['votes'] > 0:
-            liz.setRating(
-                "imdb", imdb_info['rating'], imdb_info['votes'], isimdbdef)
     else:
         liz.setUniqueIDs({'tvdb': ep.id}, 'tvdb')
+
     if ep.filename:
         liz.addAvailableArtwork(images_url+ep.filename)
     xbmcplugin.setResolvedUrl(handle=HANDLE, succeeded=True, listitem=liz)

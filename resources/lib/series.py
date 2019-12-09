@@ -8,7 +8,7 @@ import sys
 from . import tvdb
 from .utils import log
 from .artwork import add_artworks
-from .imdb_rating import get_imdb_rating_and_votes
+from .ratings import ratings_series
 
 
 ADDON = xbmcaddon.Addon()
@@ -77,19 +77,12 @@ def get_series_details(id, images_url: str):
                  'mediatype': 'tvshow'
                  })
 
-    isimdbdef = (show.imdbId and ADDON.getSetting('RatingS') == 1)  # IMDb
+    ratings_series(liz, show)
+
     if show.imdbId:
         liz.setUniqueIDs({'tvdb': show.id, 'imdb': show.imdbId}, 'tvdb')
-        imdb_info = get_imdb_rating_and_votes(show.imdbId)
-        if imdb_info['votes'] > 0:
-            liz.setRating(
-                "imdb", imdb_info['rating'], imdb_info['votes'], isimdbdef)
-            liz.setRating("tvdb", show.siteRating,
-                          show.siteRatingCount, not isimdbdef)
     else:
         liz.setUniqueIDs({'tvdb': show.id}, 'tvdb')
-        liz.setRating("tvdb", show.siteRating,
-                      show.siteRatingCount, True)
 
     liz.setCast(_get_cast(show, images_url))
     add_artworks(show, liz, images_url)
