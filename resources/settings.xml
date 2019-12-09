@@ -62,9 +62,22 @@
                </constraints>
                <control type="spinner" format="integer" />
             </setting>
-            <setting id="token" type="string">
-               <visible>false</visible>
-            </setting>
+				<setting help="" id="token" type="string">
+					<level>0</level>
+					<default/>
+					<constraints>
+						<allowempty>true</allowempty>
+					</constraints>
+					<dependencies>
+						<dependency type="visible">
+							<condition name="InfoBool" on="property">false</condition>
+						</dependency>
+					</dependencies>
+					<control format="string" type="edit">
+						<heading/>
+					</control>
+				</setting>
+
          </group>
       </category>
    </section>
