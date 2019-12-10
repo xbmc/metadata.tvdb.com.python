@@ -5,7 +5,7 @@ import xbmcaddon
 import sys
 from . import tvdb
 from .utils import log
-from .ratings import ratings_episode
+from .ratings import ratings
 
 
 ADDON = xbmcaddon.Addon()
@@ -81,7 +81,7 @@ def get_episode_details(id, images_url: str):
 
     liz.setInfo('video', details)
 
-    ratings_episode(liz, ep)
+    ratings(liz, ep)
 
     if ep.imdbId:
         liz.setUniqueIDs({'tvdb': ep.id, 'imdb': ep.imdbId}, 'tvdb')

@@ -8,7 +8,7 @@ import sys
 from . import tvdb
 from .utils import log
 from .artwork import add_artworks
-from .ratings import ratings_series
+from .ratings import ratings
 
 
 ADDON = xbmcaddon.Addon()
@@ -77,7 +77,7 @@ def get_series_details(id, images_url: str):
                  'mediatype': 'tvshow'
                  })
 
-    ratings_series(liz, show)
+    ratings(liz, show)
 
     if show.imdbId:
         liz.setUniqueIDs({'tvdb': show.id, 'imdb': show.imdbId}, 'tvdb')

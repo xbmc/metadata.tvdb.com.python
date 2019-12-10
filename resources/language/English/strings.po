@@ -47,3 +47,7 @@ msgstr ""
 msgctxt "#30009"
 msgid "IMDb"
 msgstr ""
+
+msgctxt "#30010"
+msgid "Trakt"
+msgstr ""
