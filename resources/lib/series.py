@@ -22,17 +22,16 @@ def search_series(title, year=None):
     search_results = tvdb.search_series_api(title)
     if year is not None:
         filtered_search_result = tvdb.filter_by_year(search_results, year)
-        if len(filtered_search_result) > 0:
-            search_results = _find_exact_series_match(
-                filtered_search_result, title)
-        else:
-            search_results = _find_exact_series_match(search_results, title)
+        
+        search_results = _find_exact_series_match(
+            filtered_search_result if len(filtered_search_result) > 0 else search_results, title)
+    else:
+        search_results = _find_exact_series_match(search_results, title)
 
     if search_results is None:
         return
     for show in search_results:
         liz = xbmcgui.ListItem(show['seriesName'], offscreen=True)
-        # liz.setProperty('relevance', '0.5')
         xbmcplugin.addDirectoryItem(
             handle=HANDLE,
             url=str(show['id']),

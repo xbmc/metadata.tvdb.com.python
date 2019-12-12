@@ -11,14 +11,7 @@ tvdb.KEYS.API_KEY = 'd60d3c015fdb148931e8254c0e96f072'
 tvdb.KEYS.API_TOKEN = ADDON.getSetting('token')
 
 
-def filter_by_year(shows, year):
-    """
-    Filter a show by year
-
-    :param shows: the list of shows from TVDB
-    :param year: premiere year
-    :return: a found show or None
-    """
+def filter_by_year(shows, year: int):
     ret = []
     for show in shows:
         firstAired = safe_get(show, 'firstAired', '')
