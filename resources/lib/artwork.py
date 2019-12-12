@@ -11,11 +11,11 @@ HANDLE = int(sys.argv[1])
 
 def add_artworks(show, liz, images_url: str):
     # Set primary images
-    if show.poster:
+    if hasattr(show, 'poster') and show.poster:
         liz.addAvailableArtwork(images_url+show.poster, 'poster')
-    if show.poster:
+    if hasattr(show, 'banner') and show.banner:
         liz.addAvailableArtwork(images_url+show.banner, 'banner')
-    if show.poster:
+    if hasattr(show, 'fanart') and show.fanart:
         liz.addAvailableArtwork(images_url+show.fanart, 'fanart')
 
     for poster in sorted(show.Images.poster, key=lambda image: image['ratingsInfo']['average'], reverse=True):
