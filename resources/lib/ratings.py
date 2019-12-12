@@ -1,8 +1,9 @@
 import sys
+
 import xbmcaddon
+
 from .imdb_rating import get_imdb_rating_and_votes
 from .trakt_rating import get_trakt_rating_and_votes
-
 
 ADDON = xbmcaddon.Addon()
 HANDLE = int(sys.argv[1])
@@ -39,12 +40,12 @@ def _get_and_set_trakt_ratings(liz, item, is_episode: bool):
     is_trakt_def = False
 
     trakt_rating = get_trakt_rating_and_votes(item.id, is_episode)
-    if ('votes' in trakt_rating and trakt_rating['votes'] > 0) or trakt_rating['rating'] > 0:
+    if 'rating' in trakt_rating and trakt_rating['rating'] > 0:
         got_trakt_rating = True
         is_trakt_def = (ADDON.getSetting(
             'RatingS') == "2")  # Trakt
 
-        if trakt_rating['votes'] > 0:
+        if ('votes' in trakt_rating and trakt_rating['votes'] > 0) :
             liz.setRating(
                 "trakt", trakt_rating['rating'], trakt_rating['votes'], is_trakt_def)
         else:
