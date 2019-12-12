@@ -81,7 +81,7 @@ def get_episode_details(id, images_url: str):
 
     liz.setInfo('video', details)
 
-    ratings(liz, ep)
+    ratings(liz, ep, True)
 
     if ep.imdbId:
         liz.setUniqueIDs({'tvdb': ep.id, 'imdb': ep.imdbId}, 'tvdb')

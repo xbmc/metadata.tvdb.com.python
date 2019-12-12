@@ -42,7 +42,6 @@ def search_series(title, year=None):
 
 
 def _find_exact_series_match(series_list, title: str):
-    log(series_list)
     first_or_default = next(
         (x for x in series_list if x['seriesName'] == title), None)
 
@@ -77,7 +76,7 @@ def get_series_details(id, images_url: str):
                  'mediatype': 'tvshow'
                  })
 
-    ratings(liz, show)
+    ratings(liz, show, False)
 
     if show.imdbId:
         liz.setUniqueIDs({'tvdb': show.id, 'imdb': show.imdbId}, 'tvdb')
