@@ -16,7 +16,7 @@ HANDLE = int(sys.argv[1])
 
 
 # add the found shows to the list
-def search_series(title, year=None):
+def search_series(title, year=None) -> None:
     log('Searching for TV show "{}"'.format(title))
 
     search_results = tvdb.search_series_api(title)
@@ -35,6 +35,40 @@ def search_series(title, year=None):
         xbmcplugin.addDirectoryItem(
             handle=HANDLE,
             url=str(show['id']),
+            listitem=liz,
+            isFolder=True
+        )
+
+# add the found shows to the list
+def search_series_by_imdb_id(imdb_id) -> None:
+    log('Searching for TV show with imdb id "{}"'.format(imdb_id))
+
+    search_results = tvdb.search_series_api('', imdb_id)
+
+    if search_results is None:
+        return
+    for show in search_results:
+        liz = xbmcgui.ListItem(show['seriesName'], offscreen=True)
+        xbmcplugin.addDirectoryItem(
+            handle=HANDLE,
+            url=str(show['id']),
+            listitem=liz,
+            isFolder=True
+        )
+
+# add the found shows to the list
+def search_series_by_tvdb_id(tvdb_id) -> None:
+    log('Searching for TV show with tvdb id "{}"'.format(tvdb_id))
+
+    search_results = tvdb.get_series_details_api(tvdb_id)
+
+    if search_results is None:
+        return
+    for show in search_results:
+        liz = xbmcgui.ListItem(show.seriesName, offscreen=True)
+        xbmcplugin.addDirectoryItem(
+            handle=HANDLE,
+            url=str(show.id),
             listitem=liz,
             isFolder=True
         )

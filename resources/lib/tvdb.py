@@ -20,11 +20,11 @@ def filter_by_year(shows, year: int):
     return ret
 
 
-def search_series_api(title):
+def search_series_api(title: str, imdb_id: str = ''):
     search = tvdb.Search()
     ret = None
     try:
-        ret = search.series(title, language=ADDON.getSetting('language'))
+        ret = search.series(title, language=ADDON.getSetting('language'), imdbId = imdb_id)
     except:
         pass
     ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)

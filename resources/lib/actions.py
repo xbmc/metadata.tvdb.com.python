@@ -11,6 +11,8 @@ from . import series
 from . import episodes
 from .artwork import get_artworks
 from .utils import log
+from .nfo import get_show_from_nfo
+
 
 HANDLE = int(sys.argv[1])
 images_url = 'http://thetvdb.com/banners/'
@@ -24,8 +26,8 @@ def run():
         if action == 'find' and 'title' in params:
             series.search_series(urllib.parse.unquote_plus(
                 params["title"]), params.get("year", None))
-        # elif action.lower() == 'nfourl':
-            # get_show_from_nfo(params['nfo'])
+        elif action.lower() == 'nfourl':
+            get_show_from_nfo(params['nfo'], images_url)
         elif action == 'getdetails' and 'url' in params:
             series.get_series_details(
                 urllib.parse.unquote_plus(params["url"]), images_url)
