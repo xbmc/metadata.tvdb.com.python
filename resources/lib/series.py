@@ -52,7 +52,16 @@ def _match_by_year(search_results: list, year: int, title: str) -> list:
     if len(exact_matches) > 0:
         return exact_matches
 
-    return tvdb.filter_by_year(_filter_starts_with(search_results, title), year)
+    exact_year_match = tvdb.filter_by_year(
+        _filter_starts_with(search_results, title), year)
+
+    if len(exact_year_match) > 0:
+        return exact_year_match
+
+    nearest_year = _nearest(
+        [item.firstAired[:4] for item in search_results], year)
+    return tvdb.filter_by_year(
+        _filter_starts_with(search_results, title), nearest_year)
 
 
 def search_series_by_imdb_id(imdb_id) -> None:
@@ -89,6 +98,10 @@ def search_series_by_tvdb_id(tvdb_id) -> None:
             listitem=liz,
             isFolder=True
         )
+
+
+def _nearest(items, pivot):
+    return min(items, key=lambda x: abs(x - pivot))
 
 
 def _filter_exact_matches(series_list: list, title: str) -> list:
