@@ -91,18 +91,19 @@ def search_series_by_tvdb_id(tvdb_id) -> None:
         )
 
 
-def _filter_exact_matches(series_list, title: str):
+def _filter_exact_matches(series_list: list, title: str) -> list:
     ret = []
     for show in series_list:
-        if show['seriesName'] == title:
+        if show['seriesName'].casefold() == title.casefold():
             ret.append(show)
     return ret
 
 
-def _filter_starts_with(series_list, title: str):
+def _filter_starts_with(series_list: list, title: str) -> list:
     ret = []
+    title = title.casefold()
     for show in series_list:
-        if show['seriesName'].startswith(title):
+        if show['seriesName'].casefold().startswith(title):
             ret.append(show)
     return ret
 
