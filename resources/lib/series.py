@@ -15,18 +15,17 @@ ADDON = xbmcaddon.Addon()
 HANDLE = int(sys.argv[1])
 
 
-# add the found shows to the list
 def search_series(title, year=None) -> None:
+    # add the found shows to the list
     log('Searching for TV show "{}"'.format(title))
 
     search_results = tvdb.search_series_api(title)
+    search_results = _filter_exact_matches(search_results, title)
     if year is not None:
         filtered_search_result = tvdb.filter_by_year(search_results, year)
-        
-        search_results = _find_exact_series_match(
-            filtered_search_result if len(filtered_search_result) > 0 else search_results, title)
-    else:
-        search_results = _find_exact_series_match(search_results, title)
+
+        search_results = filtered_search_result if len(
+            filtered_search_result) > 0 else search_results
 
     if search_results is None:
         return
@@ -39,8 +38,9 @@ def search_series(title, year=None) -> None:
             isFolder=True
         )
 
-# add the found shows to the list
+
 def search_series_by_imdb_id(imdb_id) -> None:
+    # add the found shows to the list
     log('Searching for TV show with imdb id "{}"'.format(imdb_id))
 
     search_results = tvdb.search_series_api('', imdb_id)
@@ -56,8 +56,9 @@ def search_series_by_imdb_id(imdb_id) -> None:
             isFolder=True
         )
 
-# add the found shows to the list
+
 def search_series_by_tvdb_id(tvdb_id) -> None:
+    # add the found shows to the list
     log('Searching for TV show with tvdb id "{}"'.format(tvdb_id))
 
     search_results = tvdb.get_series_details_api(tvdb_id)
@@ -74,19 +75,16 @@ def search_series_by_tvdb_id(tvdb_id) -> None:
         )
 
 
-def _find_exact_series_match(series_list, title: str):
-    first_or_default = next(
-        (x for x in series_list if x['seriesName'] == title), None)
-
-    if first_or_default is None:
-        return series_list
-    else:
-        return [first_or_default]
-
-    # get the details of the found series
+def _filter_exact_matches(series_list, title: str):
+    ret = []
+    for show in series_list:
+        if show['seriesName'] == title:
+            ret.append(show)
+    return ret
 
 
 def get_series_details(id, images_url: str):
+    # get the details of the found series
     log('Find info of tvshow with id {id}'.format(id=id))
     show = tvdb.get_series_details_api(id)
     if not show:
