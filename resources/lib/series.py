@@ -20,10 +20,12 @@ def search_series(title, year=None) -> None:
     log('Searching for TV show "{}"'.format(title))
 
     search_results = tvdb.search_series_api(title)
-    if year is not None:
-        search_results = _match_by_year(search_results, year, title)
-    else:
-        search_results = _filter_exact_matches(search_results, title)
+
+    possible_matches = _match_by_year(
+        search_results, year, title) if year is not None else _filter_exact_matches(search_results, title)
+
+    search_results = possible_matches if len(
+        possible_matches) > 0 else search_results
 
     if search_results is None:
         return
@@ -50,11 +52,7 @@ def _match_by_year(search_results: list, year: int, title: str) -> list:
     if len(exact_matches) > 0:
         return exact_matches
 
-    search_results = _filter_starts_with(search_results, title)
-    filtered_search_result = tvdb.filter_by_year(search_results, year)
-
-    return filtered_search_result if len(
-        filtered_search_result) > 0 else search_results
+    return tvdb.filter_by_year(_filter_starts_with(search_results, title), year)
 
 
 def search_series_by_imdb_id(imdb_id) -> None:
