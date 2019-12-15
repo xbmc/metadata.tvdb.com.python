@@ -20,12 +20,10 @@ def search_series(title, year=None) -> None:
     log('Searching for TV show "{}"'.format(title))
 
     search_results = tvdb.search_series_api(title)
-    search_results = _filter_exact_matches(search_results, title)
     if year is not None:
-        filtered_search_result = tvdb.filter_by_year(search_results, year)
-
-        search_results = filtered_search_result if len(
-            filtered_search_result) > 0 else search_results
+        search_results = _match_by_year(search_results, year, title)
+    else:
+        search_results = _filter_exact_matches(search_results, title)
 
     if search_results is None:
         return
@@ -37,6 +35,26 @@ def search_series(title, year=None) -> None:
             listitem=liz,
             isFolder=True
         )
+
+
+def _match_by_year(search_results: list, year: int, title: str) -> list:
+    exact_matches_with_year = _filter_exact_matches(
+        search_results, "{} ({})".format(title, year))
+
+    if len(exact_matches_with_year) > 0:
+        return exact_matches_with_year
+
+    exact_matches = _filter_exact_matches(
+        search_results, title)
+
+    if len(exact_matches) > 0:
+        return exact_matches
+
+    search_results = _filter_starts_with(search_results, title)
+    filtered_search_result = tvdb.filter_by_year(search_results, year)
+
+    return filtered_search_result if len(
+        filtered_search_result) > 0 else search_results
 
 
 def search_series_by_imdb_id(imdb_id) -> None:
@@ -79,6 +97,14 @@ def _filter_exact_matches(series_list, title: str):
     ret = []
     for show in series_list:
         if show['seriesName'] == title:
+            ret.append(show)
+    return ret
+
+
+def _filter_starts_with(series_list, title: str):
+    ret = []
+    for show in series_list:
+        if show['seriesName'].startswith(title):
             ret.append(show)
     return ret
 
