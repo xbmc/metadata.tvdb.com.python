@@ -46,22 +46,23 @@ def _match_by_year(search_results: list, year: int, title: str) -> list:
     if len(exact_matches_with_year) > 0:
         return exact_matches_with_year
 
-    exact_matches = _filter_exact_matches(
-        search_results, title)
-
-    if len(exact_matches) > 0:
-        return exact_matches
-
     exact_year_match = tvdb.filter_by_year(
-        _filter_starts_with(search_results, title), year)
+        _filter_exact_matches(search_results, title), year)
 
     if len(exact_year_match) > 0:
         return exact_year_match
 
     nearest_year = _nearest(
-        [item.firstAired[:4] for item in search_results], year)
-    return tvdb.filter_by_year(
-        _filter_starts_with(search_results, title), nearest_year)
+        [int(item['firstAired'][:4]) for item in search_results], int(year))
+    exact_match_nearest_year = tvdb.filter_by_year(
+        _filter_exact_matches(search_results, title), nearest_year)
+
+    if len(exact_match_nearest_year) > 0:
+        return exact_match_nearest_year
+
+    # if all else fails, just match by title
+    return _filter_exact_matches(
+        search_results, title)
 
 
 def search_series_by_imdb_id(imdb_id) -> None:
@@ -108,15 +109,6 @@ def _filter_exact_matches(series_list: list, title: str) -> list:
     ret = []
     for show in series_list:
         if show['seriesName'].casefold() == title.casefold():
-            ret.append(show)
-    return ret
-
-
-def _filter_starts_with(series_list: list, title: str) -> list:
-    ret = []
-    title = title.casefold()
-    for show in series_list:
-        if show['seriesName'].casefold().startswith(title):
             ret.append(show)
     return ret
 
