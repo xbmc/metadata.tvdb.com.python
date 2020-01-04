@@ -53,7 +53,7 @@ def _match_by_year(search_results: list, year: int, title: str) -> list:
         return exact_year_match
 
     nearest_year = _nearest(
-        [int(item['firstAired'][:4]) for item in search_results], int(year))
+        [int(item['firstAired'][:4]) for item in search_results if 'firstAired' in item], int(year))
     exact_match_nearest_year = tvdb.filter_by_year(
         _filter_exact_matches(search_results, title), nearest_year)
 
