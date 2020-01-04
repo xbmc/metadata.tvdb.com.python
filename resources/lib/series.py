@@ -11,15 +11,14 @@ from .artwork import add_artworks
 from .ratings import ratings
 
 
-ADDON = xbmcaddon.Addon()
 HANDLE = int(sys.argv[1])
 
 
-def search_series(title, year=None) -> None:
+def search_series(title, year=None, settings) -> None:
     # add the found shows to the list
     log('Searching for TV show "{}"'.format(title))
 
-    search_results = tvdb.search_series_api(title)
+    search_results = tvdb.search_series_api(title, settings)
 
     possible_matches = _match_by_year(
         search_results, year, title) if year is not None else _filter_exact_matches(search_results, title)
@@ -69,7 +68,7 @@ def search_series_by_imdb_id(imdb_id) -> None:
     # add the found shows to the list
     log('Searching for TV show with imdb id "{}"'.format(imdb_id))
 
-    search_results = tvdb.search_series_api('', imdb_id)
+    search_results = tvdb.search_series_api('', settings, imdb_id)
 
     if search_results is None:
         return
@@ -83,11 +82,11 @@ def search_series_by_imdb_id(imdb_id) -> None:
         )
 
 
-def search_series_by_tvdb_id(tvdb_id) -> None:
+def search_series_by_tvdb_id(tvdb_id, settings) -> None:
     # add the found shows to the list
     log('Searching for TV show with tvdb id "{}"'.format(tvdb_id))
 
-    search_results = tvdb.get_series_details_api(tvdb_id)
+    search_results = tvdb.get_series_details_api(tvdb_id, settings)
 
     if search_results is None:
         return
@@ -113,10 +112,10 @@ def _filter_exact_matches(series_list: list, title: str) -> list:
     return ret
 
 
-def get_series_details(id, images_url: str):
+def get_series_details(id, images_url: str, settings):
     # get the details of the found series
     log('Find info of tvshow with id {id}'.format(id=id))
-    show = tvdb.get_series_details_api(id)
+    show = tvdb.get_series_details_api(id, settings)
     if not show:
         xbmcplugin.setResolvedUrl(
             HANDLE, False, xbmcgui.ListItem(offscreen=True))
@@ -137,7 +136,7 @@ def get_series_details(id, images_url: str):
                  'mediatype': 'tvshow'
                  })
 
-    ratings(liz, show, False)
+    ratings(liz, show, False, settings)
 
     if show.imdbId:
         liz.setUniqueIDs({'tvdb': show.id, 'imdb': show.imdbId}, 'tvdb')

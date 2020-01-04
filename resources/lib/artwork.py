@@ -36,8 +36,8 @@ def add_artworks(show, liz, images_url: str):
         liz.setAvailableFanart(fanarts)
 
 
-def get_artworks(id, images_url: str):
-    show = tvdb.get_series_details_api(id, False)
+def get_artworks(id, images_url: str, settings):
+    show = tvdb.get_series_details_api(id, settings, False)
     if not show:
         xbmcplugin.setResolvedUrl(
             HANDLE, False, xbmcgui.ListItem(offscreen=True))

@@ -11,7 +11,8 @@ SHOW_ID_REGEXPS = (
 )
 UrlParseResult = namedtuple('UrlParseResult', ['provider', 'show_id'])
 
-def get_show_from_nfo(nfo: bytes, images_url: str):
+
+def get_show_from_nfo(nfo: bytes, settings):
     """
     Get show info by NFO file contents
 
@@ -26,7 +27,8 @@ def get_show_from_nfo(nfo: bytes, images_url: str):
     parse_result = _parse_nfo_url(nfo)
     if parse_result:
         if parse_result.provider == 'thetvdb':
-            show_info = series.search_series_by_tvdb_id(parse_result.show_id, images_url, False)
+            show_info = series.search_series_by_tvdb_id(
+                parse_result.show_id, settings)
         elif parse_result.provider == 'imdb':
             show_info = series.search_series_by_imdb_id(parse_result.show_id)
 

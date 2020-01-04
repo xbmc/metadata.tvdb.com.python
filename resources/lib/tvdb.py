@@ -5,7 +5,6 @@ import xbmcaddon
 import tvdbsimple as tvdb
 from .utils import safe_get
 
-
 ADDON = xbmcaddon.Addon()
 tvdb.KEYS.API_KEY = 'd60d3c015fdb148931e8254c0e96f072'
 tvdb.KEYS.API_TOKEN = ADDON.getSetting('token')
@@ -20,19 +19,20 @@ def filter_by_year(shows, year: int):
     return ret
 
 
-def search_series_api(title: str, imdb_id: str = ''):
+def search_series_api(title: str, settings, imdb_id: str = ''):
     search = tvdb.Search()
     ret = None
     try:
-        ret = search.series(title, language=ADDON.getSetting('language'), imdbId = imdb_id)
+        ret = search.series(title, language=settings.getSettingString(
+            'language'), imdbId=imdb_id)
     except:
         pass
     ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)
     return ret
 
 
-def get_series_details_api(id, all=True):
-    show = tvdb.Series(id, language=ADDON.getSetting('language'))
+def get_series_details_api(id, settings, all=True):
+    show = tvdb.Series(id, language=settings.getSettingString('language'))
     if all:
         try:
             show.info()
@@ -66,10 +66,9 @@ def get_series_details_api(id, all=True):
     return show
 
 
-def get_series_episodes_api(id, language=None):
+def get_series_episodes_api(id, settings):
     ret = None
-    if not language:
-        language = ADDON.getSetting('language')
+    language = settings.getSettingString('language')
     showeps = tvdb.Series_Episodes(id, language=language)
     try:
         ret = showeps.all()
@@ -79,9 +78,8 @@ def get_series_episodes_api(id, language=None):
     return ret
 
 
-def get_episode_details_api(id, language=None):
-    if not language:
-        language = ADDON.getSetting('language')
+def get_episode_details_api(id, settings):
+    language = settings.getSettingString('language')
     ep = tvdb.Episode(id, language=language)
     try:
         ep.info()

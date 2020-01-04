@@ -8,15 +8,14 @@ from .utils import log
 from .ratings import ratings
 
 
-ADDON = xbmcaddon.Addon()
 HANDLE = int(sys.argv[1])
 
 # add the episodes of a series to the list
 
 
-def get_series_episodes(id):
+def get_series_episodes(id, settings):
     log('Find episodes of tvshow with id {id}'.format(id=id))
-    episodes = tvdb.get_series_episodes_api(id)
+    episodes = tvdb.get_series_episodes_api(id, settings)
     if not episodes:
         xbmcplugin.setResolvedUrl(
             HANDLE, False, xbmcgui.ListItem(offscreen=True))
@@ -26,10 +25,10 @@ def get_series_episodes(id):
         details = {'title': ep['episodeName'],
                    'aired': ep['firstAired']
                    }
-        if (ADDON.getSetting('absolutenumber') == 'true'):
+        if (settings.getSettingBool('absolutenumber') == True):
             details['season'] = 1
             details['episode'] = ep['absoluteNumber']
-        elif (ADDON.getSetting('dvdorder') == 'true'):
+        elif (settings.getSettingBool('dvdorder') == True):
             details['season'] = ep['dvdSeason']
             details['episode'] = ep['dvdEpisodeNumber']
         else:
@@ -43,9 +42,9 @@ def get_series_episodes(id):
 # get the details of the found episode
 
 
-def get_episode_details(id, images_url: str):
+def get_episode_details(id, images_url: str, settings):
     log('Find info of episode with id {id}'.format(id=id))
-    ep = tvdb.get_episode_details_api(id)
+    ep = tvdb.get_episode_details_api(id, settings)
     if not ep:
         xbmcplugin.setResolvedUrl(
             HANDLE, False, xbmcgui.ListItem(offscreen=True))
@@ -69,10 +68,10 @@ def get_episode_details(id, images_url: str):
         details['sortepisode'] = ep.airsBeforeSeason
         details['sortseason'] = ep.airsBeforeEpisode
 
-    if (ADDON.getSetting('absolutenumber') == 'true'):
+    if (settings.getSettingBool('absolutenumber') == True):
         details['season'] = 1
         details['episode'] = ep.absoluteNumber
-    elif (ADDON.getSetting('dvdorder') == 'true'):
+    elif (settings.getSettingBool('dvdorder') == True):
         details['season'] = ep.dvdSeason
         details['episode'] = ep.dvdEpisodeNumber
     else:
@@ -81,7 +80,7 @@ def get_episode_details(id, images_url: str):
 
     liz.setInfo('video', details)
 
-    ratings(liz, ep, True)
+    ratings(liz, ep, True, settings)
 
     if ep.imdbId:
         liz.setUniqueIDs({'tvdb': ep.id, 'imdb': ep.imdbId}, 'tvdb')

@@ -4,8 +4,7 @@
 import xbmc
 import xbmcaddon
 
-ADDON = xbmcaddon.Addon()
-ID = ADDON.getAddonInfo('id')
+ID = xbmcaddon.Addon().getAddonInfo('id')
 
 
 def safe_get(dct, key, default=None):
