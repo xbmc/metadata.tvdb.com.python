@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
-import xbmcaddon
 import xbmcgui
 import xbmcplugin
 import sys
@@ -14,7 +13,7 @@ from .ratings import ratings
 HANDLE = int(sys.argv[1])
 
 
-def search_series(title, year=None, settings) -> None:
+def search_series(title, settings, year=None) -> None:
     # add the found shows to the list
     log('Searching for TV show "{}"'.format(title))
 
@@ -52,7 +51,7 @@ def _match_by_year(search_results: list, year: int, title: str) -> list:
         return exact_year_match
 
     nearest_year = _nearest(
-        [int(item['firstAired'][:4]) for item in search_results if 'firstAired' in item], int(year))
+        [int(item['firstAired'][:4]) for item in search_results if 'firstAired' in item and item['firstAired'] is not None], int(year))
     exact_match_nearest_year = tvdb.filter_by_year(
         _filter_exact_matches(search_results, title), nearest_year)
 

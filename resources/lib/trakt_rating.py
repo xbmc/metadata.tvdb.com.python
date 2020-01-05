@@ -1,3 +1,6 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
 from trakt import Trakt
 from trakt.objects import Show, Episode
 

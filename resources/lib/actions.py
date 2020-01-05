@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+import xbmcaddon
 import xbmcplugin
 import sys
 import requests
@@ -31,7 +32,7 @@ def run():
         action = urllib.parse.unquote_plus(params["action"])
         if action == 'find' and 'title' in params:
             series.search_series(urllib.parse.unquote_plus(
-                params["title"]), params.get("year", None), settings)
+                params["title"]), settings, params.get("year", None))
         elif action.lower() == 'nfourl':
             get_show_from_nfo(params['nfo'], settings)
         elif action == 'getdetails' and 'url' in params:

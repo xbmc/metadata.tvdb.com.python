@@ -1,7 +1,8 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
 
 import xbmcplugin
 import xbmcgui
-import xbmcaddon
 import sys
 from . import tvdb
 from .utils import log

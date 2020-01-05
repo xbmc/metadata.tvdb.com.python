@@ -1,7 +1,7 @@
+#!/usr/bin/env python
+# -*- coding: UTF-8 -*-
+
 import sys
-
-import xbmcaddon
-
 from .imdb_rating import get_imdb_rating_and_votes
 from .trakt_rating import get_trakt_rating_and_votes
 
