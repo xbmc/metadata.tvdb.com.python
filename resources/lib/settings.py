@@ -30,7 +30,7 @@ class PathSpecificSettings(object):
     def _log_bad_value(self, value, setting_id):
         if value is None:
             self.log(
-                "requested setting ({0}) was not found.".format(setting_id))
+                f"requested setting ({setting_id}) was not found.")
         else:
-            self.log('failed to load value "{0}" for setting {1}'.format(
-                value, setting_id))
+            self.log(
+                f'failed to load value "{value}" for setting {setting_id}')

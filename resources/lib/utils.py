@@ -21,5 +21,4 @@ def safe_get(dct, key, default=None):
 
 
 def log(msg):
-    xbmc.log(msg='{addon}: {msg}'.format(
-        addon=ID, msg=msg), level=xbmc.LOGDEBUG)
+    xbmc.log(msg=f'{ID}: {msg}', level=xbmc.LOGDEBUG)

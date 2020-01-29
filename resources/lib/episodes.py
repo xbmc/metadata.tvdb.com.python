@@ -15,7 +15,7 @@ HANDLE = int(sys.argv[1])
 
 
 def get_series_episodes(id, settings):
-    log('Find episodes of tvshow with id {id}'.format(id=id))
+    log(f'Find episodes of tvshow with id {id}')
     episodes = tvdb.get_series_episodes_api(id, settings)
     if not episodes:
         xbmcplugin.setResolvedUrl(
@@ -44,7 +44,7 @@ def get_series_episodes(id, settings):
 
 
 def get_episode_details(id, images_url: str, settings):
-    log('Find info of episode with id {id}'.format(id=id))
+    log(f'Find info of episode with id {id}')
     ep = tvdb.get_episode_details_api(id, settings)
     if not ep:
         xbmcplugin.setResolvedUrl(

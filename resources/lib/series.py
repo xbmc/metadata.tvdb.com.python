@@ -15,7 +15,7 @@ HANDLE = int(sys.argv[1])
 
 def search_series(title, settings, year=None) -> None:
     # add the found shows to the list
-    log('Searching for TV show "{}"'.format(title))
+    log(f'Searching for TV show "{title}"')
 
     search_results = tvdb.search_series_api(title, settings)
 
@@ -39,7 +39,7 @@ def search_series(title, settings, year=None) -> None:
 
 def _match_by_year(search_results: list, year: int, title: str) -> list:
     exact_matches_with_year = _filter_exact_matches(
-        search_results, "{} ({})".format(title, year))
+        search_results, f"{title} ({year})")
 
     if len(exact_matches_with_year) > 0:
         return exact_matches_with_year
@@ -65,7 +65,7 @@ def _match_by_year(search_results: list, year: int, title: str) -> list:
 
 def search_series_by_imdb_id(imdb_id) -> None:
     # add the found shows to the list
-    log('Searching for TV show with imdb id "{}"'.format(imdb_id))
+    log(f'Searching for TV show with imdb id "{imdb_id}"')
 
     search_results = tvdb.search_series_api('', settings, imdb_id)
 
@@ -83,7 +83,7 @@ def search_series_by_imdb_id(imdb_id) -> None:
 
 def search_series_by_tvdb_id(tvdb_id, settings) -> None:
     # add the found shows to the list
-    log('Searching for TV show with tvdb id "{}"'.format(tvdb_id))
+    log(f'Searching for TV show with tvdb id "{tvdb_id}"')
 
     search_results = tvdb.get_series_details_api(tvdb_id, settings)
 
@@ -114,7 +114,7 @@ def _filter_exact_matches(series_list: list, title: str) -> list:
 
 def get_series_details(id, images_url: str, settings):
     # get the details of the found series
-    log('Find info of tvshow with id {id}'.format(id=id))
+    log(f'Find info of tvshow with id {id}')
     show = tvdb.get_series_details_api(id, settings)
     if not show:
         xbmcplugin.setResolvedUrl(

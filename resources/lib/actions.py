@@ -24,7 +24,7 @@ images_url = 'http://thetvdb.com/banners/'
 
 def run():
     params = dict(urllib.parse.parse_qsl(sys.argv[2][1:]))
-    log('Called addon with params: {}'.format(sys.argv))
+    log(f'Called addon with params: {sys.argv}')
     if 'action' in params:
         settings = ADDON_SETTINGS if not params.get('pathSettings') else \
             PathSpecificSettings(json.loads(
