@@ -105,9 +105,10 @@ def _nearest(items, pivot):
 
 def _filter_exact_matches(series_list: list, title: str) -> list:
     ret = []
-    for show in series_list:
-        if show['seriesName'].casefold() == title.casefold():
-            ret.append(show)
+    if series_list is not None:
+        for show in series_list:
+            if show['seriesName'].casefold() == title.casefold():
+                ret.append(show)
     return ret
 
 
