@@ -38,6 +38,9 @@ def search_series(title, settings, year=None) -> None:
 
 
 def _match_by_year(search_results: list, year: int, title: str) -> list:
+    if search_results is None:
+        return []
+
     exact_matches_with_year = _filter_exact_matches(
         search_results, f"{title} ({year})")
 
