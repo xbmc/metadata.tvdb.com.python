@@ -27,8 +27,8 @@ def _get_and_set_imdb_ratings(liz, item, settings):
         imdb_rating = get_imdb_rating_and_votes(item.imdbId)
         if imdb_rating['votes'] > 0:
             got_imdb_rating = True
-            is_imdb_def = (item.imdbId and settings.getSettingString(
-                'RatingS') == "1")  # IMDb
+            is_imdb_def = (item.imdbId and settings.getSettingInt(
+                'RatingS') == 1)  # IMDb
             liz.setRating(
                 "imdb", imdb_rating['rating'], imdb_rating['votes'], is_imdb_def)
 
@@ -42,8 +42,8 @@ def _get_and_set_trakt_ratings(liz, item, is_episode: bool, settings):
     trakt_rating = get_trakt_rating_and_votes(item.id, is_episode)
     if 'rating' in trakt_rating and trakt_rating['rating'] > 0:
         got_trakt_rating = True
-        is_trakt_def = (settings.getSettingString(
-            'RatingS') == "2")  # Trakt
+        is_trakt_def = (settings.getSettingInt(
+            'RatingS') == 2)  # Trakt
 
         if ('votes' in trakt_rating and trakt_rating['votes'] > 0):
             liz.setRating(
