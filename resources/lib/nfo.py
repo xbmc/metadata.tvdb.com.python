@@ -26,7 +26,7 @@ def get_show_from_nfo(nfo: bytes, settings):
     """
     if isinstance(nfo, bytes):
         nfo = nfo.decode('utf-8', 'replace')
-    log.debug(f'Parsing NFO file:\n{nfo}')
+    log(f'Parsing NFO file:\n{nfo}')
     parse_result = _parse_nfo_url(nfo)
     if parse_result:
         if parse_result.provider == 'thetvdb':
