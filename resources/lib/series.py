@@ -88,18 +88,20 @@ def search_series_by_tvdb_id(tvdb_id, settings) -> None:
     # add the found shows to the list
     log(f'Searching for TV show with tvdb id "{tvdb_id}"')
 
-    search_results = tvdb.get_series_details_api(tvdb_id, settings)
+    show = tvdb.get_series_details_api(tvdb_id, settings)
 
-    if search_results is None:
+    if not show:
+        xbmcplugin.setResolvedUrl(
+            HANDLE, False, xbmcgui.ListItem(offscreen=True))
         return
-    for show in search_results:
-        liz = xbmcgui.ListItem(show.seriesName, offscreen=True)
-        xbmcplugin.addDirectoryItem(
-            handle=HANDLE,
-            url=str(show.id),
-            listitem=liz,
-            isFolder=True
-        )
+
+    liz = xbmcgui.ListItem(show.seriesName, offscreen=True)
+    xbmcplugin.addDirectoryItem(
+        handle=HANDLE,
+        url=str(show.id),
+        listitem=liz,
+        isFolder=True
+    )
 
 
 def _nearest(items, pivot):
