@@ -31,7 +31,7 @@ def search_series_api(title: str, settings, imdb_id: str = ''):
     return ret
 
 
-def get_series_details_api(id, settings, all=True) -> Series:
+def get_series_details_api(id, settings, all=True):
     show = tvdb.Series(id, language=settings.getSettingString('language'))
     if all:
         try:
