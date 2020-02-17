@@ -19,6 +19,8 @@ def search_series(title, settings, year=None) -> None:
 
     search_results = tvdb.search_series_api(title, settings)
 
+    log(f'Search results {search_results}')
+
     possible_matches = _match_by_year(
         search_results, year, title) if year is not None else _filter_exact_matches(search_results, title)
 
@@ -28,7 +30,10 @@ def search_series(title, settings, year=None) -> None:
     if search_results is None:
         return
     for show in search_results:
-        liz = xbmcgui.ListItem(show['seriesName'], offscreen=True)
+        nameAndYear = f"{show['seriesName']}" if not show[
+            'firstAired'] else f"{show['seriesName']} ({show['firstAired']})"
+
+        liz = xbmcgui.ListItem(nameAndYear, offscreen=True)
         xbmcplugin.addDirectoryItem(
             handle=HANDLE,
             url=str(show['id']),
