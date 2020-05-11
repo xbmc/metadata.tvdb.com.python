@@ -27,7 +27,7 @@ def get_show_from_nfo(nfo: bytes, settings):
     if isinstance(nfo, bytes):
         nfo = nfo.decode('utf-8', 'replace')
     log(f'Parsing NFO file:\n{nfo}')
-    parse_result = _parse_nfo_url(nfo)
+    parse_result = parse_nfo_url(nfo)
     if parse_result:
         if parse_result.provider == 'thetvdb':
             show_info = series.search_series_by_tvdb_id(
@@ -36,7 +36,7 @@ def get_show_from_nfo(nfo: bytes, settings):
             show_info = series.search_series_by_imdb_id(parse_result.show_id)
 
 
-def _parse_nfo_url(nfo):
+def parse_nfo_url(nfo):
     """Extract show ID from NFO file contents"""
     for regexp in SHOW_ID_REGEXPS:
         show_id_match = re.search(regexp, nfo, re.I)
