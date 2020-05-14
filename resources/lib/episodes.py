@@ -7,7 +7,7 @@ import sys
 from . import tvdb
 from .utils import log
 from .ratings import ratings
-from .nfo import nfo
+from .nfo import parse_nfo_url
 
 
 HANDLE = int(sys.argv[1])
@@ -21,7 +21,7 @@ def get_series_episodes(id, settings):
         # Kodi has a bug: when a show directory contains an XML NFO file with
         # episodeguide URL, that URL is always passed here regardless of
         # the actual parsing result in get_show_from_nfo()
-        parse_result = nfo.parse_nfo_url(id)
+        parse_result = parse_nfo_url(id)
         if not parse_result:
             return
 
