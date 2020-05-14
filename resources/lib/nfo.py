@@ -7,10 +7,8 @@ from . import series
 from .utils import log
 
 SHOW_ID_REGEXPS = (
-    r'(tvmaze)\.com/shows/(\d+)/[\w\-]',
-    r'(thetvdb)\.com/.*?series/(\d+)',
-    r'(thetvdb)\.com[\w=&\?/]+id=(\d+)',
-    r'(imdb)\.com/[\w/\-]+/(tt\d+)',
+    r'<uniqueid type=\"(tvdb)\".*>(\d+)</uniqueid>',
+    r'<uniqueid type=\"(imdb)\".*>(tt\d+)</uniqueid>',
 )
 UrlParseResult = namedtuple('UrlParseResult', ['provider', 'show_id'])
 
@@ -29,7 +27,7 @@ def get_show_from_nfo(nfo: bytes, settings):
     log(f'Parsing NFO file:\n{nfo}')
     parse_result = parse_nfo_url(nfo)
     if parse_result:
-        if parse_result.provider == 'thetvdb':
+        if parse_result.provider == 'tvdb':
             show_info = series.search_series_by_tvdb_id(
                 parse_result.show_id, settings)
         elif parse_result.provider == 'imdb':
