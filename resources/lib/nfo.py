@@ -8,6 +8,7 @@ from . import series
 from .utils import log
 
 SHOW_ID_FROM_EPISODE_GUIDE_REGEXPS = (
+    r'(thetvdb)\.com[\w=&\?/{}\":,]+\"id\":(\d+)',
     r'(thetvdb)\.com/.*?series/(\d+)',
     r'(thetvdb)\.com[\w=&\?/]+id=(\d+)',
 )
