@@ -18,6 +18,7 @@ SHOW_ID_REGEXPS = (
     r'<uniqueid type=\"(imdb)\".*>(tt\d+)</uniqueid>',
     r'(thetvdb)\.com/.*?series/([\w\s\d()-]+)',
     r'(thetvdb)\.com[\w=&\?/]+id=(\d+)',
+    r'(imdb)\.com/[\w/\-]+/(tt\d+)',
 )
 UrlParseResult = namedtuple('UrlParseResult', ['provider', 'show_id'])
 
