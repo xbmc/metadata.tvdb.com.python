@@ -37,7 +37,7 @@ def get_show_id_from_nfo(nfo: bytes, settings):
     parse_result = _parse_nfo_url(nfo)
     if parse_result:
         if parse_result.provider == 'tvdb' or parse_result.provider == 'thetvdb':
-            if _parse_nfo_url.show_id.isdigit():
+            if parse_result.show_id.isdigit():
                 series.search_series_by_tvdb_id(
                     parse_result.show_id, settings)
             else:  # id seems to be the show name
