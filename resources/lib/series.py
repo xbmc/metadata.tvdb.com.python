@@ -1,14 +1,15 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+import sys
+
 import xbmcgui
 import xbmcplugin
-import sys
+
 from . import tvdb
-from .utils import log
 from .artwork import add_artworks
 from .ratings import ratings
-
+from .utils import log
 
 HANDLE = int(sys.argv[1])
 
@@ -71,7 +72,7 @@ def _match_by_year(search_results: list, year: int, title: str) -> list:
         search_results, title)
 
 
-def search_series_by_imdb_id(imdb_id) -> None:
+def search_series_by_imdb_id(imdb_id, settings) -> None:
     # add the found shows to the list
     log(f'Searching for TV show with imdb id "{imdb_id}"')
 

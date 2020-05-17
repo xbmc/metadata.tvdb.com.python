@@ -1,21 +1,21 @@
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
+import json
+import sys
+import urllib.error
+import urllib.parse
+import urllib.request
+
+import requests
 import xbmcaddon
 import xbmcplugin
-import sys
-import requests
-import urllib.request
-import urllib.parse
-import urllib.error
-import json
-from . import series
-from . import episodes
-from .artwork import get_artworks
-from .utils import log
-from .nfo import get_show_from_nfo
-from .settings import PathSpecificSettings
 
+from . import episodes, series
+from .artwork import get_artworks
+from .nfo import get_show_id_from_nfo
+from .settings import PathSpecificSettings
+from .utils import log
 
 ADDON_SETTINGS = xbmcaddon.Addon()
 HANDLE = int(sys.argv[1])
@@ -34,7 +34,7 @@ def run():
             series.search_series(urllib.parse.unquote_plus(
                 params["title"]), settings, params.get("year", None))
         elif action.lower() == 'nfourl':
-            get_show_from_nfo(params['nfo'], settings)
+            get_show_id_from_nfo(params['nfo'], settings)
         elif action == 'getdetails' and 'url' in params:
             series.get_series_details(
                 urllib.parse.unquote_plus(params["url"]), images_url, settings)
