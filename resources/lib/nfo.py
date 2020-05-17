@@ -16,7 +16,7 @@ SHOW_ID_FROM_EPISODE_GUIDE_REGEXPS = (
 SHOW_ID_REGEXPS = (
     r'<uniqueid type=\"(tvdb)\".*>(\d+)</uniqueid>',
     r'<uniqueid type=\"(imdb)\".*>(tt\d+)</uniqueid>',
-    r'(thetvdb)\.com/.*?series/(\d+)',
+    r'(thetvdb)\.com/.*?series/([\w\s\d()-]+)',
     r'(thetvdb)\.com[\w=&\?/]+id=(\d+)',
 )
 UrlParseResult = namedtuple('UrlParseResult', ['provider', 'show_id'])
@@ -37,8 +37,13 @@ def get_show_id_from_nfo(nfo: bytes, settings):
     parse_result = _parse_nfo_url(nfo)
     if parse_result:
         if parse_result.provider == 'tvdb' or parse_result.provider == 'thetvdb':
-            series.search_series_by_tvdb_id(
-                parse_result.show_id, settings)
+            if _parse_nfo_url.show_id.isdigit():
+                series.search_series_by_tvdb_id(
+                    parse_result.show_id, settings)
+            else:  # id seems to be the show name
+                series.search_series(
+                    parse_result.show_id, settings)
+
         elif parse_result.provider == 'imdb':
             series.search_series_by_imdb_id(
                 parse_result.show_id, settings)
