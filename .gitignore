@@ -1,3 +1,13 @@
 *.pyc
 *.pyo
 __pycache__
+.DS*
+.pylint_rc
+/.idea
+/.coverage
+/.project
+/.pydevproject
+/.settings
+Thumbs.db
+*~
+.cache
