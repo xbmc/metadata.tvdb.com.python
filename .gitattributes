@@ -3,3 +3,5 @@
 .github export-ignore
 changelog.txt export-ignore
 HOW_TO_RELEASE.md export-ignore
+resources/lib/cassettes export-ignore
+resources/lib/test_imdb_rating.py export-ignore
