@@ -1,4 +1,4 @@
-1.0.1
+1.0.1/1.0.2
 - Fix error when checking for show without year
 
 1.0.0
