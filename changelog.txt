@@ -1,3 +1,6 @@
+1.0.2
+- Omit some files from packaging
+
 1.0.1
 - Fix error when checking for show without year
 
