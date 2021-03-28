@@ -1,7 +1,7 @@
 name: Kodi Addon-Submitter
 
 on:
-  create:
+  push:
     tags:
       - v*
 
@@ -11,7 +11,10 @@ jobs:
     name: Kodi addon submitter
     steps:
       - name: Checkout
-        uses: actions/checkout@v1
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
       - name: Generate distribution zip and submit to official kodi repository
         id: kodi-addon-submitter
         uses: xbmc/action-kodi-addon-submitter@v1.2
