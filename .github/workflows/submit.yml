@@ -20,7 +20,7 @@ jobs:
           kodi-version: matrix
           addon-id: metadata.tvdb.com.python
         env: # Make sure you create the below secrets (GH_TOKEN and EMAIL)
-          GH_USERNAME: ${{ github.actor }}
+          GH_USERNAME: Razzeee
           GH_TOKEN: ${{secrets.GH_TOKEN}}
           EMAIL: ${{secrets.EMAIL}}
       - name: Create Github Release
