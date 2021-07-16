@@ -40,3 +40,19 @@ msgstr ""
 msgctxt "#30004"
 msgid "Language"
 msgstr "Мова"
+
+msgctxt "#30005"
+msgid "Get Rating from"
+msgstr ""
+
+msgctxt "#30007"
+msgid "General"
+msgstr ""
+
+msgctxt "#30009"
+msgid "IMDb"
+msgstr ""
+
+msgctxt "#30010"
+msgid "Trakt"
+msgstr ""
