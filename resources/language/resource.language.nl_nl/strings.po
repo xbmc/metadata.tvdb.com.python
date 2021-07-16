@@ -16,6 +16,14 @@ msgstr ""
 "Language: nl\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgctxt "Addon Summary"
+msgid "Fetch TV show metadata from TheTVDB.com"
+msgstr "Seriemetadata ophalen van TheTVDB.com"
+
+msgctxt "Addon Description"
+msgid "TheTVDB.com is a TV Scraper. The site is a massive open database that can be modified by anybody and contains full meta data for many shows in different languages. All content and images on the site have been contributed by their users for users and have a high standard or quality. The database schema and website are open source under the GPL."
+msgstr "TheTVDB.com is een seriescraper. De site is een gigantische open databank die iedereen kan aanpassen en uitbreiden, en biedt metadata aan voor TV-series in verschillende talen. Alle inhoud en afbeeldingen zijn afkomstig van gebruikers en moeten een grondige kwaliteitscontrole doorstaan. Het databankschema en de websitecode zijn vrijgegeven onder de open source GPL-licentie."
+
 msgctxt "#30000"
 msgid "Use DVD Order"
 msgstr "DVD-volgorde gebruiken"

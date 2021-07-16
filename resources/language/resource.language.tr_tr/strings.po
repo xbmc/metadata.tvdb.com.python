@@ -16,6 +16,14 @@ msgstr ""
 "Language: tr\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
+msgctxt "Addon Summary"
+msgid "Fetch TV show metadata from TheTVDB.com"
+msgstr "TV programı meta verilerini TheTVDB.com'dan al"
+
+msgctxt "Addon Description"
+msgid "TheTVDB.com is a TV Scraper. The site is a massive open database that can be modified by anybody and contains full meta data for many shows in different languages. All content and images on the site have been contributed by their users for users and have a high standard or quality. The database schema and website are open source under the GPL."
+msgstr "TheTVDB.com bir TV Scraper'dır. Bu site herkesin düzenleyebileceği büyük bir açık veritabanıdır ve farklı dillerdeki bir çok şov için bilgiler içerir. Sitedeki her resim ve içerik kullanıcılar tarafından kullanıcılar için karşılanır ve bunlar yüksek standart ve kaliteye sahiptir. Veritabanı şeması ve internet sitesi GPL lisansı altında açık kaynaklıdır."
+
 msgctxt "#30000"
 msgid "Use DVD Order"
 msgstr "DVD Sıralama Kullan"

@@ -16,6 +16,14 @@ msgstr ""
 "Language: ta_IN\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+msgctxt "Addon Summary"
+msgid "Fetch TV show metadata from TheTVDB.com"
+msgstr "TheTVDB.com இருந்து தொலைக்காட்சி நிகழ்ச்சி மெட்டாடேட்டா எடுக்கபடுகின்றது"
+
+msgctxt "Addon Description"
+msgid "TheTVDB.com is a TV Scraper. The site is a massive open database that can be modified by anybody and contains full meta data for many shows in different languages. All content and images on the site have been contributed by their users for users and have a high standard or quality. The database schema and website are open source under the GPL."
+msgstr "TheTVDB.com ஒரு தொலைக்காட்சி சுரண்டி. இந்த இணையத்தளத்தில் ஒரு பெரிய தரவுத்தளம் உள்ளது. இதில் எல்லா மொழிகளின் மேட்டாடேட்டா உள்ளது. அனைத்து தகவல்களும் படங்களும் அதன் பயனர்களின் சேகரிப்புஆகும். GPL லைசன்சில் உள்ளது."
+
 msgctxt "#30000"
 msgid "Use DVD Order"
 msgstr "டிவிடி வரிசை பயன்படுத்து"

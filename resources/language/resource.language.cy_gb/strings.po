@@ -16,6 +16,14 @@ msgstr ""
 "Language: cy\n"
 "Plural-Forms: nplurals=4; plural=(n==1) ? 0 : (n==2) ? 1 : (n != 8 && n != 11) ? 2 : 3;\n"
 
+msgctxt "Addon Summary"
+msgid "Fetch TV show metadata from TheTVDB.com"
+msgstr "Estyn metadata sioeau Teledu o TheTVDB.com"
+
+msgctxt "Addon Description"
+msgid "TheTVDB.com is a TV Scraper. The site is a massive open database that can be modified by anybody and contains full meta data for many shows in different languages. All content and images on the site have been contributed by their users for users and have a high standard or quality. The database schema and website are open source under the GPL."
+msgstr "Mae TheTVDB.com yn Grafwr Teledu. Mae'r wefan yn gronfa ddata anferthol agored y mae modd ei addasu gan unrhyw un  ac yn cynnwys meta data llaw llawer o sioeau mewn ieithoedd gwahanol. Mae'r holl gynnwys a delweddau ar y wefan wedi ei gyfrannu gan eu defnyddwyr ac i safon uchel . Mae cynllun y gronfa ddata a'r wefan yn god agored o dan y GPL."
+
 msgctxt "#30000"
 msgid "Use DVD Order"
 msgstr "Defnyddio Trefn DVD"
