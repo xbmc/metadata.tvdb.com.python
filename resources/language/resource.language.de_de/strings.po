@@ -5,7 +5,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
-"Report-Msgid-Bugs-To: translations@kodi.tv\n"
+"Report-Msgid-Bugs-To: alanwww1@xbmc.org\n"
 "POT-Creation-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "PO-Revision-Date: 2021-07-15 22:29+0000\n"
 "Last-Translator: Kai Sommerfeld <kai.sommerfeld@gmx.com>\n"
@@ -40,3 +40,19 @@ msgstr "Poster bevorzugen"
 msgctxt "#30004"
 msgid "Language"
 msgstr "Sprache"
+
+msgctxt "#30005"
+msgid "Get Rating from"
+msgstr ""
+
+msgctxt "#30007"
+msgid "General"
+msgstr ""
+
+msgctxt "#30009"
+msgid "IMDb"
+msgstr ""
+
+msgctxt "#30010"
+msgid "Trakt"
+msgstr ""
