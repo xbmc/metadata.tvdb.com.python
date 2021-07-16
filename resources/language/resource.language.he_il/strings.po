@@ -22,7 +22,7 @@ msgstr "הבא מידע "
 
 msgctxt "Addon Description"
 msgid "TheTVDB.com is a TV Scraper. The site is a massive open database that can be modified by anybody and contains full meta data for many shows in different languages. All content and images on the site have been contributed by their users for users and have a high standard or quality. The database schema and website are open source under the GPL."
-msgstr "TheTVDB.com הוא סקרייפר עבור תוכניות טלוויזיה. אתר זה הוא מסד נתונים פתוח עצום אשר כל אחד יכול לערוך ומכיל פרטים מלאים להרבה תוכניות טלוויזיה בשפות שונות. כל התכנים והתמונות באתר נתרמו ע"י המשתמשים שלה עבור משתמשים וישנו סטנדרט גבוה או איכות גבוהה. תכנית המסד נתונית והאתר הם בקוד פתוח תחת ה-GPL."
+msgstr "TheTVDB.com הוא סקרייפר עבור תוכניות טלוויזיה. אתר זה הוא מסד נתונים פתוח עצום אשר כל אחד יכול לערוך ומכיל פרטים מלאים להרבה תוכניות טלוויזיה בשפות שונות. כל התכנים והתמונות באתר נתרמו עי המשתמשים שלה עבור משתמשים וישנו סטנדרט גבוה או איכות גבוהה. תכנית המסד נתונית והאתר הם בקוד פתוח תחת ה-GPL."
 
 msgctxt "#30000"
 msgid "Use DVD Order"
