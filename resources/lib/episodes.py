@@ -36,20 +36,22 @@ def get_series_episodes(id, settings):
         xbmcplugin.setResolvedUrl(
             HANDLE, False, xbmcgui.ListItem(offscreen=True))
         return
+    seasonVar = 'airedSeason'
+    epNumberVar = 'airedEpisodeNumber'
+    if (settings.getSettingBool('dvdorder') == True):
+        seasonVar = 'dvdSeason'
+        epNumberVar = 'dvdEpisodeNumber'
     for ep in episodes:
         liz = xbmcgui.ListItem(ep['episodeName'], offscreen=True)
         details = {'title': ep['episodeName'],
                    'aired': ep['firstAired']
                    }
-        if (settings.getSettingBool('absolutenumber') == True):
+        if (settings.getSettingBool('absolutenumber') == True and ep[seasonVar] > 0):
             details['season'] = 1
             details['episode'] = ep['absoluteNumber']
-        elif (settings.getSettingBool('dvdorder') == True):
-            details['season'] = ep['dvdSeason']
-            details['episode'] = ep['dvdEpisodeNumber']
         else:
-            details['season'] = ep['airedSeason']
-            details['episode'] = ep['airedEpisodeNumber']
+            details['season'] = ep[seasonVar]
+            details['episode'] = ep[epNumberVar]
         liz.setInfo('video', details)
         xbmcplugin.addDirectoryItem(handle=HANDLE, url=str(
             ep['id']), listitem=liz, isFolder=True)
@@ -84,15 +86,17 @@ def get_episode_details(id, images_url: str, settings):
         details['sortepisode'] = ep.airsBeforeSeason
         details['sortseason'] = ep.airsBeforeEpisode
 
-    if (settings.getSettingBool('absolutenumber') == True):
+    seasonFunc = lambda e: e.airedSeason
+    epNumberFunc = lambda e: e.airedEpisodeNumber
+    if (settings.getSettingBool('dvdorder') == True):
+        seasonFunc = lambda e: e.dvdSeason
+        epNumberFunc = lambda e: e.dvdEpisodeNumber
+    if (settings.getSettingBool('absolutenumber') == True and seasonFunc(ep) > 0):
         details['season'] = 1
         details['episode'] = ep.absoluteNumber
-    elif (settings.getSettingBool('dvdorder') == True):
-        details['season'] = ep.dvdSeason
-        details['episode'] = ep.dvdEpisodeNumber
     else:
-        details['season'] = ep.airedSeason
-        details['episode'] = ep.airedEpisodeNumber
+        details['season'] = seasonFunc(ep)
+        details['episode'] = epNumberFunc(ep)
 
     liz.setInfo('video', details)
 
