@@ -9,18 +9,19 @@ import xbmcplugin
 from . import tvdb
 from .artwork import add_artworks
 from .ratings import ratings
-from .utils import log
+from .utils import logger
+from .fanarttv import get_fanarttv_art
 
 HANDLE = int(sys.argv[1])
 
 
 def search_series(title, settings, year=None) -> None:
     # add the found shows to the list
-    log(f'Searching for TV show "{title}"')
+    logger.log(f'Searching for TV show "{title}"')
 
     search_results = tvdb.search_series_api(title, settings)
 
-    log(f'Search results {search_results}')
+    logger.log(f'Search results {search_results}')
 
     possible_matches = _match_by_year(
         search_results, year, title) if year else _filter_exact_matches(search_results, title)
@@ -28,19 +29,15 @@ def search_series(title, settings, year=None) -> None:
     search_results = possible_matches if len(
         possible_matches) > 0 else search_results
 
-    if search_results is None:
-        return
-    for show in search_results:
-        nameAndYear = f"{show['seriesName']}" if not show[
-            'firstAired'] else f"{show['seriesName']} ({show['firstAired']})"
+    _add_search_results(search_results)
 
-        liz = xbmcgui.ListItem(nameAndYear, offscreen=True)
-        xbmcplugin.addDirectoryItem(
-            handle=HANDLE,
-            url=str(show['id']),
-            listitem=liz,
-            isFolder=True
-        )
+
+def search_series_by_slug(slug, settings) -> None:
+    # add the found shows to the list
+    logger.log(f'Searching for TV show slug "{slug}"')
+
+    search_results = tvdb.search_series_by_slug_api(slug, settings)
+    _add_search_results(search_results)
 
 
 def _match_by_year(search_results: list, year: int, title: str) -> list:
@@ -74,14 +71,21 @@ def _match_by_year(search_results: list, year: int, title: str) -> list:
 
 def search_series_by_imdb_id(imdb_id, settings) -> None:
     # add the found shows to the list
-    log(f'Searching for TV show with imdb id "{imdb_id}"')
+    logger.log(f'Searching for TV show with imdb id "{imdb_id}"')
 
     search_results = tvdb.search_series_api('', settings, imdb_id)
+    _add_search_results(search_results)
+
+
+def _add_search_results(search_results) -> None:
+    logger.log(f'Search results {search_results}')
 
     if search_results is None:
         return
     for show in search_results:
-        liz = xbmcgui.ListItem(show['seriesName'], offscreen=True)
+        nameAndYear = f"{show['seriesName']}" if not show['firstAired'] else f"{show['seriesName']} ({show['firstAired']})"
+
+        liz = xbmcgui.ListItem(nameAndYear, offscreen=True)
         xbmcplugin.addDirectoryItem(
             handle=HANDLE,
             url=str(show['id']),
@@ -92,7 +96,7 @@ def search_series_by_imdb_id(imdb_id, settings) -> None:
 
 def search_series_by_tvdb_id(tvdb_id, settings) -> None:
     # add the found shows to the list
-    log(f'Searching for TV show with tvdb id "{tvdb_id}"')
+    logger.log(f'Searching for TV show with tvdb id "{tvdb_id}"')
 
     show = tvdb.get_series_details_api(tvdb_id, settings)
 
@@ -125,7 +129,7 @@ def _filter_exact_matches(series_list: list, title: str) -> list:
 
 def get_series_details(id, images_url: str, settings):
     # get the details of the found series
-    log(f'Find info of tvshow with id {id}')
+    logger.log(f'Find info of tvshow with id {id}')
     show = tvdb.get_series_details_api(id, settings)
     if not show:
         xbmcplugin.setResolvedUrl(
@@ -155,6 +159,7 @@ def get_series_details(id, images_url: str, settings):
         liz.setUniqueIDs({'tvdb': show.id}, 'tvdb')
 
     liz.setCast(_get_cast(show, images_url))
+    get_fanarttv_art(id, show, settings)
     add_artworks(show, liz, images_url)
     xbmcplugin.setResolvedUrl(handle=HANDLE, succeeded=True, listitem=liz)
 

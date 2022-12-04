@@ -77,7 +77,30 @@
 						<heading/>
 					</control>
 				</setting>
-
+            </group>
+        </category>
+        <category id="fanarttv" label="30020">
+            <group id="1" label="30020">
+                <setting id="enable_fanarttv" type="boolean" label="30021">
+                    <level>0</level>
+                    <default>false</default>
+                    <control type="toggle"/>
+                </setting>
+                <setting id="fanarttv_clientkey" type="string" label="30022" help="">
+                    <level>0</level>
+                    <default/>
+                    <dependencies>
+                        <dependency type="enable">
+                            <condition operator="is" setting="enable_fanarttv">true</condition>
+                        </dependency>
+                    </dependencies>
+                    <constraints>
+                        <allowempty>true</allowempty>
+                    </constraints>
+                    <control type="edit" format="string">
+                        <heading>30022</heading>
+                    </control>
+                </setting>
          </group>
       </category>
    </section>

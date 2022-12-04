@@ -9,15 +9,14 @@ import xbmcplugin
 from . import tvdb
 from .nfo import parse_episode_guide_url
 from .ratings import ratings
-from .utils import log
+from .utils import logger
 
 HANDLE = int(sys.argv[1])
 
+
 # add the episodes of a series to the list
-
-
 def get_series_episodes(id, settings):
-    log(f'Find episodes of tvshow with id {id}')
+    logger.log(f'Find episodes of tvshow with id {id}')
     if not id.isdigit():
         # Kodi has a bug: when a show directory contains an XML NFO file with
         # episodeguide URL, that URL is always passed here regardless of
@@ -28,7 +27,7 @@ def get_series_episodes(id, settings):
 
         if parse_result.provider == 'thetvdb':
             id = parse_result.show_id
-            log(f'Changed show id to {id}')
+            logger.log(f'Changed show id to {id}')
 
     episodes = tvdb.get_series_episodes_api(id, settings)
 
@@ -55,11 +54,10 @@ def get_series_episodes(id, settings):
             ep['id']), listitem=liz, isFolder=True)
     xbmcplugin.setResolvedUrl(handle=HANDLE, succeeded=True, listitem=liz)
 
+
 # get the details of the found episode
-
-
 def get_episode_details(id, images_url: str, settings):
-    log(f'Find info of episode with id {id}')
+    logger.log(f'Find info of episode with id {id}')
     ep = tvdb.get_episode_details_api(id, settings)
     if not ep:
         xbmcplugin.setResolvedUrl(

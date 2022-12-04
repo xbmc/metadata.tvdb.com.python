@@ -3,6 +3,8 @@
 
 import xbmcaddon
 import tvdbsimple as tvdb
+
+from . import cache
 from .utils import safe_get
 
 ADDON = xbmcaddon.Addon()
@@ -31,8 +33,25 @@ def search_series_api(title: str, settings, imdb_id: str = ''):
     return ret
 
 
-def get_series_details_api(id, settings, all=True):
-    show = tvdb.Series(id, language=settings.getSettingString('language'))
+def search_series_by_slug_api(slug: str, settings):
+    search = tvdb.Search()
+    ret = None
+    try:
+        ret = search.series(slug=slug, language=settings.getSettingString(
+            'language'))
+    except:
+        pass
+    ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)
+    return ret
+
+
+def get_series_details_api(show_id, settings, all=True):
+    language = settings.getSettingString('language')
+    show = cache.load_show_info_from_cache(show_id, language, 'series')
+    if show is not None:
+        return show
+
+    show = tvdb.Series(show_id, language=language)
     if all:
         try:
             show.info()
@@ -63,27 +82,44 @@ def get_series_details_api(id, settings, all=True):
     except:
         show.Images.seasonwide = []
     ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)
+
+    if all:
+        cache.cache_show_info(show_id, show, language, 'series')
+
     return show
 
 
-def get_series_episodes_api(id, settings):
+def get_series_episodes_api(show_id, settings):
     ret = None
     language = settings.getSettingString('language')
-    showeps = tvdb.Series_Episodes(id, language=language)
+    ret = cache.load_show_info_from_cache(show_id, language, 'episodes')
+    if ret is not None:
+        return ret
+
+    showeps = tvdb.Series_Episodes(show_id, language=language)
     try:
         ret = showeps.all()
     except:
         pass
     ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)
+
+    cache.cache_show_info(show_id, ret, language, 'episodes')
     return ret
 
 
-def get_episode_details_api(id, settings):
+def get_episode_details_api(episode_id, settings):
     language = settings.getSettingString('language')
-    ep = tvdb.Episode(id, language=language)
+
+    ep = cache.load_episode_info_from_cache(episode_id, language)
+    if ep is not None:
+        return ep
+
+    ep = tvdb.Episode(episode_id, language=language)
     try:
         ep.info()
     except:
         return None
     ADDON.setSetting('token', tvdb.KEYS.API_TOKEN)
+
+    cache.cache_episode_info(episode_id, ep, language)
     return ep

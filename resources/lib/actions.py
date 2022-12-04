@@ -15,7 +15,7 @@ from . import episodes, series
 from .artwork import get_artworks
 from .nfo import get_show_id_from_nfo
 from .settings import PathSpecificSettings
-from .utils import log
+from .utils import logger
 
 ADDON_SETTINGS = xbmcaddon.Addon()
 HANDLE = int(sys.argv[1])
@@ -24,11 +24,11 @@ images_url = 'http://thetvdb.com/banners/'
 
 def run():
     params = dict(urllib.parse.parse_qsl(sys.argv[2][1:]))
-    log(f'Called addon with params: {sys.argv}')
+    logger.log(f'Called addon with params: {sys.argv}')
     if 'action' in params:
         settings = ADDON_SETTINGS if not params.get('pathSettings') else \
             PathSpecificSettings(json.loads(
-                params['pathSettings']), lambda msg: log(msg))
+                params['pathSettings']), lambda msg: logger.log(msg))
         action = urllib.parse.unquote_plus(params["action"])
         if action == 'find' and 'title' in params:
             series.search_series(urllib.parse.unquote_plus(
