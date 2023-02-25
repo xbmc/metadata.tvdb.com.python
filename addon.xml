@@ -45,6 +45,7 @@
     <summary lang="ka">სატელევიზიო გადაცემების მეტაინფორმაციის გადმოტანა TVDB.com-დან</summary>
     <summary lang="ko_KR">TheTVDB.com 에서 TV 쇼 정보 가져오기</summary>
     <summary lang="lt_LT">Parsiųsti TV šou (serialo) metaduomenis iš TheTVDB.com</summary>
+    <summary lang="lv_LV">Iegūst TV pārraides informāciju (metadatus) no TheTVDB.com vietnes</summary>
     <summary lang="mk_MK">Превземи ТВ шоу метаподаток од TVDB.com</summary>
     <summary lang="ms_MY">Dapatkan data meta rancangan TV dari TheTVDB.com</summary>
     <summary lang="my_MM">TV show နှင့်ပတ်သက်သည့် အချက်အလက်များကို TheTVDB.com မှ ရယူရန်</summary>
@@ -97,6 +98,7 @@
     <description lang="ja_JP">TheTVDB.com は TV スクレーパーです。本サイトは強力でオープンなデータベースで、誰もが追加修正可能です。テレビ番組のメタデータは多くの言語で提供されています。番組情報や画像データはユーザにより提供され、そのクオリティは非常に高いものです。データベーススキーマと web サイトは GPL ライセンスのオープンソースです。</description>
     <description lang="ko_KR">TheTVDB.com 은 TV 정보수집기입니다. 위 사이트는 이용자가 직접 수정할 수 있으며 다양한 언어의 완전한 메타 데이터를 포함하는 방대한 오픈 데이터베이스입니다. 사이트의 모든 콘텐츠와 이미지들은 사이트 이용자들이 다른 이용자들을 위해 제공한 것이며 높은 품질을 가지고 있습니다. 웹사이트와 데이터베이스 스키마는 GLP 오픈소스입니다.</description>
     <description lang="lt_LT">TheTVDB.com yra TV Scraper. Ši svetainė yra didžiulė atvira duomenų bazė, kuria gali pakeisti bet kas ir kurioje visa meta duomenis bazė daugelo šou įvairiomis kalbomis. Visas svetainės turinys atnaujinamas/papyldomasvartotojų ir turi aukštą kokybės standartą. Duomenų bazės ir svetainės yra atviro kodo pagal GPL standartą.</description>
+    <description lang="lv_LV">TheTVDB.com ir TV pārraides informācijas resurss. Vietne ir milzīga publiska datu bāze, kuru var modificēt ikviens, un tā satur daudz informācijas (metadatus) par daudzām TV pārraidēm dažādās valodās. Visu vietnes saturu un attēlus ir ievadījuši tā lietotāji un tie ir augstas kvalitātes. Datu bāzes struktūra un vietne ir atvērtā pirmkoda saskaņā ar GPL licenci.</description>
     <description lang="ms_MY">TheTVDB.com adalah Pengikis TV. Laman tersebut merupakan pangkalan data terbuka yang amat besar dan boleh diubahsuai oleh sesiapa pun dan juga mengandungi data meta pelbagai rancangan dalam pelbagai bahasa. Semua kandungan dan imej di laman ini disumbang oleh pengguna mereka untuk pengguna mereka dan mempunyai piawaian dan kualiti yang amat tinggi. Skema pangkalan data dan laman adalah sumber terbuka dibawah GPL.</description>
     <description lang="my_MM">TheTVDB.com သည် TV Scraper ဖြစ်သည်။ database ထဲတွင် အချက်အလက်များစွာရှိနေပြီး မည်သူမဆို မည်သည့် ဘာသာစကားနှင့် မဆို ဝင်ရောက်ပြုပြင် နိုင်သည်။ အချက်အလက်များနှင့် ပုံများသည် ၎င်းတို့၏ အသုံးပြုသူများမှ အခြားအသုံးပြုသူများအတွက် ပံ့ပိုးထားသော အဆင်မြင့် အရေအသွေးများဖြစ်သည်။ website နှင့် database သည် open source GPL လိုင်စင် ကို အသုံးပြုထားသည်။</description>
     <description lang="nb_NO">TheTVDB.com er en Tv Skraper. Siden er en massiv åpen database som kan endres av alle og inneholder data for mange forskjellige programmer på mange språk. Alt innholdet og bildene på siden er lagt til av brukere for brukere og har høy standard og kvalitet. Database skjemaet og websiden er åpen kildekode underlagt GPL.</description>
