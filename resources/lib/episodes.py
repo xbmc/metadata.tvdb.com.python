@@ -77,12 +77,17 @@ def get_episode_details(id, images_url: str, settings):
                'mediatype': 'episode'
                }
 
-    if ep.airsAfterSeason and ep.airsAfterSeason >= 0:
+    if (
+        ep.airsBeforeEpisode
+        and ep.airsBeforeEpisode >= 0
+        and ep.airsBeforeSeason
+        and ep.airsBeforeSeason >= 0
+    ):
+        details['sortepisode'] = ep.airsBeforeEpisode
+        details['sortseason'] = ep.airsBeforeSeason
+    elif ep.airsAfterEpisode and ep.airsAfterEpisode >= 0:
         details['sortseason'] = 10000
-        details['sortepisode'] = ep.airsAfterSeason
-    elif ep.airsBeforeSeason and ep.airsBeforeSeason >= 0:
-        details['sortepisode'] = ep.airsBeforeSeason
-        details['sortseason'] = ep.airsBeforeEpisode
+        details['sortepisode'] = ep.airsAfterEpisode
 
     if (settings.getSettingBool('absolutenumber') == True):
         details['season'] = 1
