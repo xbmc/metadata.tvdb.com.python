@@ -27,7 +27,7 @@
     <summary lang="en_NZ">Fetch TV show metadata from TheTVDB.com</summary>
     <summary lang="en_US">Fetch TV show metadata from TheTVDB.com</summary>
     <summary lang="es_AR">Recuperar metadatos de series de TV en TheTVDB.com</summary>
-    <summary lang="es_ES">Recuperar metadatos de series de TV en TheTVDB.com</summary>
+    <summary lang="es_ES">Obtiene metadatos de series de TV de TheTVDB.com</summary>
     <summary lang="es_MX">Obtener metadata de Series desde TheTVDB.com</summary>
     <summary lang="et_EE">Hangi sarjade metaandmed allikast TheTVDB.com</summary>
     <summary lang="fi_FI">TheTVDB.com-tietolähde televisiosarjoille</summary>
@@ -51,10 +51,10 @@
     <summary lang="my_MM">TV show နှင့်ပတ်သက်သည့် အချက်အလက်များကို TheTVDB.com မှ ရယူရန်</summary>
     <summary lang="nb_NO">Hent TV program data fra TheTVDB.com</summary>
     <summary lang="nl_NL">Seriemetadata ophalen van TheTVDB.com</summary>
-    <summary lang="pl_PL">Pobieraj dane o serialach telewizyjnych z TheTVDB.com</summary>
+    <summary lang="pl_PL">Pobieraj informacje o serialach telewizyjnych z TheTVDB.com</summary>
     <summary lang="pt_BR">Obtenha dados dos seriados do TheTVDB.com</summary>
     <summary lang="pt_PT">Obtenha metadados para séries TV a partir de TVDB.com</summary>
-    <summary lang="ro_RO">Obţineţi datele despre seriale de la TheTVDB.com</summary>
+    <summary lang="ro_RO">Obţineți metadatele pentru filmele seriale de la TheTVDB.com</summary>
     <summary lang="ru_RU">Загрузка информации о ТВ-шоу с TheTVDB.com</summary>
     <summary lang="se">Skrapa för TV-seriemetadata från TVDB.com</summary>
     <summary lang="sk_SK">Získať metadáta seriálu z TheTVDB.com</summary>
@@ -106,7 +106,7 @@
     <description lang="pl_PL">TheTVDB.com jest ekstraktorem informacji o serialach telewizyjnych. Serwis jest ogromną, wielojęzykową i otwartą bazą danych o serialach, którą może edytować każdy. Zawartość tego serwisu została stworzona przez użytkowników, dla użytkowników. Dostępne materiały są najwyższej jakości.</description>
     <description lang="pt_BR">TheTVDB.com é um scraper de seriados. O site é um enorme banco de dados aberto que pode ser modificado por qualquer pessoa e contém metadados completos de muitos seriados em diferentes idiomas. Todos os conteúdos e imagens no site foram contribuições de usuários para usuários e têm um alto padrão de qualidade. O esquema do banco de dados e do site são de código aberto sob a licença GPL.</description>
     <description lang="pt_PT">O TheTVDB.com é um colector para séries TV. O site é uma gigantesca base de dados livre que pode ser alterada por qualquer pessoa e contém informação em várias línguas. Todos os conteúdos do site foram enviados por utilizadores e têm um elevado padrão de qualidade. A base de dados e o site funcionam sob uma licença GPL de software livre.</description>
-    <description lang="ro_RO">TheTVDB.com este un colectore TV. Site-ul este o bază de date masivă, deschisă, ce poate fi modificată de oricine şi conţine date complete despre multe seriale în diferite limbi. Tot conţinutul site-ului a fost contribuit de către utilizatori pentru utilizatori şi are un standard de caliate înalt. Schema bazei de date şi site-ul au sursele libere sub licenţă GPL.</description>
+    <description lang="ro_RO">TheTVDB.com este un catalog de filme. Site-ul este o bază de date masivă, deschisă, ce poate fi modificată de oricine și conţine date complete despre multe filme seriale în diferite limbi. Tot conţinutul site-ului a fost contribuit de către utilizatori pentru utilizatori și are un standard de calitate înalt. Schema bazei de date și site-ul au sursele libere sub licență GPL.</description>
     <description lang="ru_RU">TheTVDB.com — это инфоресурс для сериалов. Сайт представляет собой огромную открытую базу данных, в которую может вносить данные любой пользователь и которая содержит полные мета-данные для многих сериалов на различных языках. Всё содержимое и изображения на сайте были выложены его пользователями для других пользователей и имеют высокий уровень качества. Структура базы данных и веб-сайт созданы с открытым исходным кодом по лицензии GPL.</description>
     <description lang="se">TVDB.com är en TV-skrapa. Sajten är en massiv öppen databas som kan ändras av vem som helst och innehåller full metadata för mängder av serier på olika språk. Allt innehåll och bilder på sajten har bidragits av användare för användare och har en hög standard eller kvalitet. Databasschemat och webbsidan är licensierat som GPL.</description>
     <description lang="sk_SK">TheTVDB.com je zdrojom metadát pre seriály. Táto stránka je obrovská otvorená databáza, ktorú môže upravovať ktokoľvek a ktorá obsahuje úplné metadáta pre mnohé seriályv rôznych jazykoch. Všetok obsah a obrázky na stránke poskytli ich používatelia pre používateľov a majú vysoký štandard alebo kvalitu. Databázová a webová stránka majú otvorený zdrojový kód pod licenciou GPL.</description>
